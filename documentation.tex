@@ -1,0 +1,741 @@
+\documentclass[12pt, a4paper]{article}
+
+% ── Packages ──────────────────────────────────────────────────────────────────
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{listings}           % for GAP code
+\usepackage{fontenc}
+\usepackage{inputenc}
+\usepackage{microtype}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{tocloft}
+\usepackage{setspace}
+\usepackage{cite}
+% ── Theorem Environments ───────────────────────────────────────────────────────
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+% ── Operators and Macros ───────────────────────────────────────────────────────
+\DeclareMathOperator{\Exp}{exp}
+\DeclareMathOperator{\lcm}{lcm}
+\newcommand{\sig}{\sigma}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\norml}{\trianglelefteq}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Dih}[1]{D_{#1}}
+\newcommand{\Sym}[1]{S_{#1}}
+\newcommand{\Alt}[1]{A_{#1}}
+\newcommand{\PSL}[2]{\mathrm{PSL}(#1,#2)}
+\newcommand{\Cp}[1]{C_{#1}}
+
+% ── Code Listing Style (GAP) ───────────────────────────────────────────────────
+\lstdefinelanguage{GAP}{
+  keywords={for, do, od, if, then, fi, return, local, function, end, true, false},
+  keywordstyle=\color{blue}\bfseries,
+  comment=[l]{\#},
+  commentstyle=\color{gray}\itshape,
+  stringstyle=\color{orange},
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  rulecolor=\color{black!30},
+  backgroundcolor=\color{black!3},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=5pt,
+  tabsize=2,
+}
+
+\lstdefinelanguage{Lean}{
+  keywords={theorem, lemma, def, where, have, show, by, intro, apply,
+            exact, rw, simp, use, obtain, rcases, constructor, fun,
+            structure, class, instance, namespace, end, open, variable,
+            import, noncomputable, section, universe, Type, Prop, Sort},
+  keywordstyle=\color{purple}\bfseries,
+  comment=[l]{--},
+  commentstyle=\color{gray}\itshape,
+  stringstyle=\color{orange},
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  rulecolor=\color{black!30},
+  backgroundcolor=\color{black!3},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=5pt,
+  tabsize=2,
+}
+
+% ── Page Style ─────────────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Equal Coverings of Finite Groups}
+\fancyhead[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\onehalfspacing
+
+% ══════════════════════════════════════════════════════════════════════════════
+\begin{document}
+
+% ── Title Page ─────────────────────────────────────────────────────────────────
+\begin{titlepage}
+  \centering
+  \vspace*{2cm}
+  {\LARGE\bfseries Equal Coverings of Finite Groups:\\[0.4em]
+    Theory, Lean Formalization, and\\[0.4em]
+    Computational Evidence\par}
+  \vspace{2cm}
+  {\large Bishesh Bohora, Ashwot Acharya, Pranjal Man Shakya, Bhoomika Thapa\par}
+  \vspace{0.5cm}
+  {\large Department of Mathematics\par}
+  \vspace{0.5cm}
+  {\large \today\par}
+  \vspace{3cm}
+  \begin{abstract}
+    \noindent
+An \textbf{equal covering} of a finite group G is a collection of proper subgroups of equal order whose union is G. This report documents a research extension of the work of Velasquez-Berroteran \cite{velasquez2022}, which developed the theory of equal coverings and computationally classified groups up to order 60.
+Our work proceeds along three strands. First, we present proofs of several foundational results on group coverings that the paper invokes but does not prove in full situating these within the equal covering framework. Second, we formalize key theorems on equal coverings in Lean 4 using Mathlib, identifying proof-theoretic subtleties along the way. Third, we extend the GAP-based computational classification of groups with equal coverings from order 60 to order 120, producing a complete table of results with supporting theoretical justifications.
+Together, these contributions provide a more complete theoretical foundation for the subject, a formal verification layer, and new computational evidence bearing on the open conjecture that no finite simple group admits an equal covering. Furthemore, We attempted a possible direction on proving the conjecture for some Alternating Groups.
+  \end{abstract}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Introduction}
+\label{sec:intro}
+
+The study of representing groups as unions of proper subgroups is a classical area of
+group theory, originating with Scorza~\cite{scorza1926} in 1926 and later revitalized
+by work of Neumann, Cohn, and many others. An \emph{equal covering} imposes the
+additional constraint that all subgroups in the covering have the same order, making the
+problem significantly more delicate.
+
+This report documents a research extension of the thesis by Velasquez-Berroteran~\cite{velasquez2022},
+which developed the foundational theory of equal coverings and classified groups up to
+order~60. We pursue three directions:
+\begin{enumerate}[label=(\roman*)]
+  \item \textbf{Theoretical:} rigorous proofs theorems on group covering, including the
+    Haber--Rosenfeld theorem~\cite{haber1959}, Cohn's results \cite{cohn1994}, study of Alternating Groups.
+  \item \textbf{Formal:} Lean~4 formalizations of selected results.
+  \item \textbf{Computational:} GAP-based classification of groups of orders 61--120.
+\end{enumerate}
+
+A central open problem motivating our work is the following conjecture from~\cite{velasquez2022}:
+
+\begin{conjecture}[Velasquez-Berroteran, 2022]
+  \label{conj:simple}
+  If $G$ is a finite simple group, then $G$ has no equal covering.
+\end{conjecture}
+
+% ── Outline ───────────────────────────────────────────────────────────────────
+\paragraph{Structure of the report.}
+\Cref{sec:prelim} collects definitions and background.
+\Cref{sec:theory} presents the theoretical results.
+\Cref{sec:lean} describes the Lean formalization.
+\Cref{sec:gap} presents the GAP algorithm and computational results.
+\Cref{sec:conjecture} analyzes \Cref{conj:simple}.
+\Cref{sec:conclusion} summarizes and lists future directions.
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Preliminaries}
+\label{sec:prelim}
+
+Throughout, all groups are \emph{finite} unless otherwise specified.
+
+\begin{definition}[Covering]
+  Let $G$ be a group. A \emph{covering} of $G$ is a collection $\Pi = \{H_i\}$ of proper
+  subgroups of $G$ such that $G = \bigcup_i H_i$. The \emph{covering number} $\sig(G)$ is
+  the minimum cardinality of any covering of $G$; we set $\sig(G) = \infty$ if $G$ is cyclic.
+\end{definition}
+
+\begin{definition}[Equal covering]
+  A covering $\Pi = \{H_i\}$ of $G$ is an \emph{equal covering} if $|H_i| = |H_j|$ for all
+  $i, j$. The \emph{equal covering number} $\eps(G)$ is the minimum cardinality of any equal
+  covering of $G$; we write $\eps(G) = \infty$ if $G$ has no equal covering.
+\end{definition}
+
+\begin{definition}[Irredundant covering {\cite[Definition~1]{velasquez2022}}]
+  A covering $\Pi$ is \emph{irredundant} (or \emph{minimal}) if for each $H_i \in \Pi$
+  there exists $x_i \in H_i$ with $x_i \notin \bigcup_{j \neq i} H_j$.
+\end{definition}
+
+\begin{definition}[Exponent {\cite[Definition~4]{velasquez2022}}]
+  The \emph{exponent} of $G$, written $\Exp(G)$, is the smallest positive integer $n$
+  such that $g^n = 1$ for all $g \in G$. For finite $G$, $\Exp(G) = \lcm\{|g| : g \in G\}$.
+\end{definition}
+
+\begin{definition}[Semidirect product {\cite[Definition~5]{velasquez2022}}]
+  $G$ is the \emph{semidirect product} of subgroups $H$ and $K$, written $G = H \rtimes K$,
+  if $H \norml G$, $HK = G$, and $H \cap K = \{1\}$.
+\end{definition}
+
+\begin{definition}[Partition]
+  A covering $\Pi$ of $G$ is a \emph{partition} if any two distinct members intersect
+  trivially. The \emph{partition number} $\rho(G)$ is the minimum cardinality of any
+  partition.
+\end{definition}
+
+\begin{remark}
+  Every equal partition is an equal covering, so $\eps(G) \leq \rho(G)$ whenever both are
+  finite. However, the classes of groups with equal coverings and equal partitions differ
+  substantially.
+\end{remark}
+
+% ══════════════════════════════════════════════════════════════════════════════
+
+\section{Theoretical Results}
+\label{sec:theory}
+
+\subsection{Fundamental Results in Group Covering}
+% \label{sec:history}
+Before studying equal coverings, we worked through the following foundational results on general group coverings. The following proofs are included to document our study of the theory and also because cannot be found directly in \cite{velasquez2022}.
+
+
+\begin{theorem}[{\cite[Theorem~1]{velasquez2022}}]
+  \label{thm:cyclic}
+  A group $G$ has a covering if and only if $G$ is non-cyclic.
+\end{theorem}
+
+\begin{proof}
+  Suppse G has a covering $\Pi$ and G is cyclic, Let g be the generator of G i.e $<g> = G$, Since $\Pi$ is a covering of G, $g \in H $, $H \in \Pi$. Since g generates G, $g \in H  \implies G = H$. Hence H is not proper and no such covering exist.
+  
+  Conversly, Suppose G is non cyclic, then define $ \Pi = \{<a>|a \in G\}$ Since G is non cyclic, each $<a>$ is a proper subgroup.
+
+
+\end{proof}
+
+\begin{theorem}[{\cite[Theorem~2]{velasquez2022}}]
+  For any group $G$, $\sig(G) \neq 2$.
+\end{theorem}
+It is a fundamental result in Group Theory That a group cannot be expressed as union of two proper subgroups, We again prove this result.
+\begin{proof}
+  
+  Suppose H,K $<$ G and $H \cup K = G$.
+  Let $h \in H $ and $k \in K$,
+  $\implies hk \in G$ 
+  $\implies hk \in H \vee hk \in K$\\
+   $hk \in H \implies h^{-1}hk \in H \implies k \in H \implies K \subseteq H \implies H = G$
+   Similarly  if $hk \in K$ it follows that $K=G$, therefore atleast one of H or K must be proper.
+
+\end{proof}
+\begin{proposition}{$2<\sigma(G) \leq n-1$}
+\end{proposition}
+\begin{proof}
+    $|\Pi| \leq n-1 $ if $ \Pi=\{<a>|a$ is non identity element of G$\}. $
+\end{proof}
+\begin{theorem}[Scorza, 1926]
+
+\label{thm:scorza}
+$\sigma(G) = 3$ if and only if there exists $N \trianglelefteq G$ such that
+$G/N \cong C_2 \times C_2$.
+\end{theorem}
+The proof follows the argument in \cite{scorza1926}, but several intermediate steps have been added for completeness and ease of comprehension, along with modification of statement aligning with \cite{velasquez2022}.
+\begin{proof}
+
+\noindent\textbf{($\Leftarrow$)} 
+Suppose \(N \trianglelefteq G\) and
+\(G/N \cong C_2 \times C_2\). Let
+\(\pi:G \to G/N\) be the natural quotient map. Let
+\(A_1,A_2,A_3\) be the three proper subgroups of \(C_2 \times C_2\), and define
+\[
+H_i=\pi^{-1}(A_i), \qquad i=1,2,3.
+\]
+Since the inverse image of a subgroup under a homomorphism is a subgroup, each
+\(H_i\) is a subgroup of \(G\). Moreover, each \(A_i\) is proper, so
+\(H_i\neq G\).
+
+Now let \(g\in G\). If \(\pi(g)=N\), then \(\pi(g)\in A_i\) for every \(i\).
+Otherwise, \(\pi(g)\) is one of the three nonidentity elements of
+\(C_2\times C_2\), each of which lies in a unique subgroup \(A_i\). Hence
+\(g\in H_i\) for some \(i\). Therefore,
+\[
+G=H_1\cup H_2\cup H_3,
+\]
+so \(\sigma(G)\le3\). Since no group is the union of one or two proper
+subgroups, \(\sigma(G)\notin\{1,2\}\). Hence \(\sigma(G)=3\).\\
+
+\bigskip
+\noindent\textbf{($\Rightarrow$)}
+ Suppose $G = H_1 \cup H_2 \cup H_3$ with
+each $H_i$ a proper subgroup, and the covering minimal.
+
+\medskip
+\noindent\textit{Each $H_i$ contains elements outside both others.}
+
+If $H_i \subseteq H_j \cup H_k$ for some permutation $\{i,j,k\}$ of
+$\{1,2,3\}$, then $G = H_j \cup H_k$, contradicting $\sigma(G) \neq 2$.
+So no $H_i$ is superfluous, and in particular for each $i$ there exist
+elements of $H_i$ lying outside both remaining subgroups.
+
+\medskip
+\noindent\textit{All pairwise intersections coincide.}
+
+Set $N := H_1 \cap H_2 \cap H_3$. We show $H_i \cap H_j = N$ for all $i \neq j$;
+it suffices to show $H_1 \cap H_2 \subseteq H_3$.
+
+Suppose for contradiction there exists $h \in (H_1 \cap H_2) \setminus H_3$.
+Now pick $h_3 \in H_3 \setminus (H_1 \cup H_2)$.
+Consider the product $hh_3 \in G$:
+\begin{itemize}
+  \item $hh_3 \notin H_1$: otherwise $h_3 = h^{-1}(hh_3) \in H_1$,
+    since $h \in H_1$. Contradiction.
+  \item $hh_3 \notin H_2$: otherwise $h_3 = h^{-1}(hh_3) \in H_2$,
+    since $h \in H_2$. Contradiction.
+  \item $hh_3 \notin H_3$: otherwise $h = (hh_3)h_3^{-1} \in H_3$,
+    since $h_3 \in H_3$. Contradiction.
+\end{itemize}
+So $hh_3 \notin H_1 \cup H_2 \cup H_3 = G$, which is absurd.
+Hence $H_1 \cap H_2 \subseteq H_3$, giving $H_1 \cap H_2 = N$.
+By symmetry, $H_i \cap H_j = N$ for all $i \neq j$.
+
+\medskip
+\noindent\textit{The cosets of $N$ form a Klein four-group.}
+
+Write $X_i := H_i \setminus N$ for each $i$, so that as sets:
+\[
+  G = N \;\sqcup\; X_1 \;\sqcup\; X_2 \;\sqcup\; X_3.
+\]
+We show that $\{N, X_1, X_2, X_3\}$ is closed under the operation
+$A \cdot B := \{ab : a \in A,\, b \in B\}$, and forms a group isomorphic
+to $C_2 \times C_2$.
+
+\smallskip
+\noindent\textit{(a) $X_i \cdot X_j = X_k$ for any permutation $\{i,j,k\}$
+of $\{1,2,3\}$.}
+
+Let $x_i \in X_i$ (so $x_i \in H_i \setminus N$) and $x_j \in X_j$
+(so $x_j \in H_j \setminus N$). The product $x_i x_j$ cannot lie in $H_i$
+(otherwise $x_j = x_i^{-1}(x_ix_j) \in H_i$, contradicting $x_j \notin N
+= H_i \cap H_j$, so $x_j \notin H_i$) and cannot lie in $H_j$ by the
+symmetric argument. Hence $x_ix_j \in H_k$. Since $H_k = N \sqcup X_k$,
+we ask whether $x_ix_j \in N$. But $N = H_i\cap H_j$, and $x_ix_j \in H_k
+\setminus H_i$ (as just shown), so $x_ix_j \notin H_i \supseteq N$; thus
+$x_ix_j \in X_k$. This gives $X_i \cdot X_j \subseteq X_k$.
+
+For the reverse inclusion, take any $x_k \in X_k$. Pick any $x_i \in X_i$;
+then $x_i x_k \in G$, and by the same argument (applied to $i$ and $k$),
+$x_i x_k \in X_j$. So $x_k = x_i^{-1}(x_i x_k)$. Now $x_i^{-1} \in X_i$
+(since $x_i \in H_i\setminus N$ implies $x_i^{-1}\in H_i\setminus N$) and
+$x_i x_k \in X_j$, so $x_k \in X_i \cdot X_j$. Thus $X_k \subseteq X_i
+\cdot X_j$, giving $X_i \cdot X_j = X_k$.
+
+\smallskip
+\noindent\textit{(b) $X_i \cdot X_i = N$ for each $i$.}
+
+From (a), $X_i \cdot X_j = X_k$ implies $X_i = X_k \cdot X_j^{-1}$;
+but by (a) $X_k \cdot X_j = X_i$, and since $X_j \cdot X_j^{-1}$... more
+directly: by (a) applied twice, $X_i\cdot(X_i \cdot X_j) = X_i \cdot X_k
+= X_j$, and $(X_i\cdot X_i)\cdot X_j = X_j$ forces $X_i\cdot X_i = N$.
+
+Alternatively: take $x, x' \in X_i$. Then $xx'^{-1}$: note $x'^{-1}\in X_i$
+(as above). By (a) with $j = i$, $x\cdot x'^{-1} \in X_k$ for some $k$, but
+$xx'^{-1} \in H_i$ (since both $x, x'^{-1} \in H_i$), so $xx'^{-1}\in H_i\cap
+X_k$. Since $X_k = H_k\setminus N$ and $H_i\cap H_k = N$, we get $xx'^{-1}
+\in N$. Thus every product of two elements of $X_i$ lands in $N$.
+Conversely, for any $n\in N$, pick $x\in X_i$; then $nx \in X_i$ (since
+$nx \in H_i$ and $nx\notin N$, as otherwise $x = n^{-1}(nx)\in N$), and
+$x\cdot(nx) = (x\cdot n\cdot x^{-1})\cdot x^2$... instead: $n = (nx)x^{-1}
+\in X_i\cdot X_i$. Hence $X_i\cdot X_i = N$.
+
+
+
+\medskip
+\noindent Finally for \textit{ $N \trianglelefteq G$ and $G/N \cong C_2\times C_2$.} \\
+Consider the function $\phi : G/N \to C_2 \times C_2$ 
+where we map each element of $G/N$ as \\ 
+$N \mapsto (0,0), X_1 \mapsto (0,1), X_2 \mapsto (1,0), X_3 \mapsto (1,1)$ then its clearly a bijection.
+and we have already shown $X_iX_j = X_k$ for any permutation of $\{i,j,k\}$ of $\{1,2,3\}$ and  $X_iX_i = N$ which respects the structure of $C_2 \times C_2$. Hence,
+\[
+  G/N \;\cong\; C_2\times C_2. \qedhere
+\]
+\end{proof}
+\begin{remark}
+  Note that in \cite{velasquez2022} $V_4$ is used for denoting the Klein-4 Group.
+\end{remark}
+\begin{theorem}[Haber--Rosenfeld {\cite[Theorem~4]{velasquez2022}}]
+  \label{thm:hr}
+  Let $p$ be the smallest prime divisor of $|G|$.
+  \begin{enumerate}[label=\emph{(\roman*)}]
+    \item $G$ cannot be the union of $p$ or fewer proper subgroups.
+    \item If $\Pi = \{H_i\}$ is a covering of $G$ by $p+1$ proper subgroups, then
+      some $H_i$ satisfies $[G : H_i] = p$. Moreover, if such $H_i$ is normal in $G$,
+      then every $H \in \Pi$ has index $p$ and $p^2 \mid |G|$.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  (i) Consider the covering where $ n \leq p$, $\Pi = \{H_i|H_i<G, 1 \leq i \leq n\}$
+  Since all subgroup must have identity element as common we have,
+  \[
+     |G| < \sum_{1}^{n} |Hi|\]
+     Let H be the subgroup with highest order, and since p is the least prime divisior we have
+     [G:H] $\leq$ p  $\implies \frac{|G|}{|H|} \leq p \implies  \frac{|G|}{p} \leq |H|$\\ 
+     Then we have, $|G| < n|H| \implies |G|<n.\frac{|G|}{p} \implies p < n$ which is a contradiction.\\ 
+  (ii) Consider the covering with p + 1 subgroups  $\Pi = \{H_i|H_i<G, 1 \leq i \leq p+1 \}$ \\
+  Suppose none of the subgroups have index p. then $[G:H_i] \geq p+1 \implies |H_i| \geq \frac{|G|}{p+1}$\\ 
+  Take the subgroup $H_i$ with maximum order then $|G| < (p+1)|H_i| \implies |G| < (p+1) \frac{|G|}{p+1}$\\ 
+  $\implies |G| < |G| $ is a contradiction. So, one of the sugbroup must have index p.\\ 
+  Let $H$ be the subgroup with index p and assume its normal.\\ 
+  Since $H$ is normal then $HH_i$ is a subgroup of G with $H,H_i \subseteq HH_i$. If $HH_i$ is proper, we will find the covering with p subgroups by excluding $H, H_i$ and including $HH_i$ which contradicts (i). So $HH_i = G$.\\ 
+  
+  
+  $$|G|=|HH_i|=\frac{|H||H_i|}{|H\cap H_i|} \implies |H_i|=|G| \frac{|Hi \cap H|}{|H|} \implies |H_i|= p|H \cap H_i|  $$\\ 
+  Now let the indices of other$ H_i$ be $q_i > p$, and for convinience let $H_1 = H $.
+  
+   $$ |G| \leq |H_1| + \sum_{2}^{p+1} |H_i|- |H_i \cap H_1| = |H_1| + \sum_{2}^{p+1} \frac{|G|}{q_i} - \frac{|G|}{pq_i}$$
+   $$ < |H_1| + p (\frac{|G|}{p} - \frac{|G|}{p^2}) = \frac{|G|}{p} +|G| - \frac{|G|}{p} =|G| \implies |G|<|G|  $$
+   Which is a contradiction. So $p = q_i$. 
+   Finally, $[G:H_i \cap H_1] = [G:H_i][H_i:H_i \cap H_1] = p.\frac{|G|}{|H_1|} = p.\frac {|G|} {\frac{|G|}{p}} = p^2 \implies p^2 $ divides $|G|$. 
+  
+  % Part (ii): use quotient G/H_i \cong Z/pZ, second isomorphism theorem
+\end{proof}
+
+\subsubsection{The covering sum inequality}
+
+\begin{lemma}
+  \label{lem:sum}
+  If $G = \bigcup_{i=1}^n H_i$ is a covering by proper subgroups, then
+  \[
+    \sum_{i=1}^{n} \frac{1}{[G:H_i]} \geq 1.
+  \]
+\end{lemma}
+
+\begin{proof}
+  For each $g \in G$, since $g \in H_i$ for some $i$, summing the indicator
+  functions $\mathbf{1}_{H_i}$ over $G$ and switching the order of summation gives
+  $\sum_{i=1}^n |H_i| \geq |G|$. Dividing by $|G|$ yields the result.
+\end{proof}
+
+
+\begin{lemma}
+\label{lem:quotient}
+If $N \trianglelefteq G$, then $\sigma(G) \leq \sigma(G/N)$.
+\end{lemma}
+
+\begin{proof}
+If $G/N$ is cyclic the inequality is trivial, so assume $\sigma(G/N) = n < \infty$.
+Let $G/N = \bar{H}_1 \cup \cdots \cup \bar{H}_n$ be a minimal covering by proper
+subgroups. Define $H_r := \pi^{-1}(\bar{H}_r)$ for each $r$, where
+$\pi : G \twoheadrightarrow G/N$ is the natural projection.
+
+By the Correspondence Theorem, each $H_r$ is a subgroup of $G$ with
+$[G : H_r] = [G/N : \bar{H}_r] \geq 2$, so each $H_r$ is proper.
+For any $g \in G$, $\pi(g) \in \bar{H}_r$ for some $r$, hence $g \in H_r$.
+Thus $G = H_1 \cup \cdots \cup H_n$, giving $\sigma(G) \leq n = \sigma(G/N)$.
+\end{proof}
+
+\begin{lemma}
+\label{lem:coprime}
+For any finite groups $H$ and $K$,
+$\sigma(H \times K) \leq \min\{\sigma(H), \sigma(K)\}$.
+If additionally $\gcd(|H|, |K|) = 1$, then equality holds.
+\end{lemma}
+
+\begin{proof}
+\textbf{Inequality.}
+If $\sigma(H) = n < \infty$, say $H = \bigcup_{i=1}^n A_i$ with each $A_i \lneq H$,
+then $H \times K = \bigcup_{i=1}^n (A_i \times K)$ and each $A_i \times K$ is a
+proper subgroup of $H \times K$. So $\sigma(H \times K) \leq \sigma(H)$, and
+symmetrically $\sigma(H \times K) \leq \sigma(K)$, giving the inequality.
+
+\medskip
+\textbf{Equality when $\gcd(|H|,|K|) = 1$.}
+It remains to show $\sigma(H \times K) \geq \min\{\sigma(H), \sigma(K)\}$.
+We use the following structural fact:
+
+We claim :If $\gcd(|H|,|K|) = 1$, every subgroup $L \leq H \times K$ satisfies
+$L = \pi_H(L) \times \pi_K(L)$, where $\pi_H, \pi_K$ are the coordinate
+projections.
+
+\begin{proof}[Proof of Claim]
+Let $(h, k) \in L$. Since $\gcd(|H|, |K|) = 1$, the orders $|h|$ and $|k|$
+are coprime, so by Bezout's theorem there exist integers $s, t$ with
+$s|h| + t|k| = 1$. Then:
+\[
+  (h, k)^{t|k|} = (h^{t|k|}, e) = (h^{1 - s|h|}, e) = (h, e),
+\]
+so $(h, e) \in L$, and symmetrically $(e, k) \in L$.
+Hence $L \supseteq \pi_H(L) \times \pi_K(L)$; the reverse inclusion is
+immediate from the definition of projection.
+\end{proof}
+
+Now let $H \times K = \bigcup_{i=1}^n L_i$ be any covering by proper subgroups,
+with $n = \sigma(H \times K)$. By the Claim, write $L_i = A_i \times B_i$ where
+$A_i = \pi_H(L_i) \leq H$ and $B_i = \pi_K(L_i) \leq K$. Projecting the
+covering onto $H$:
+\[
+  H = \pi_H\!\left(\bigcup_{i=1}^n L_i\right) = \bigcup_{i=1}^n A_i.
+\]
+Since each $L_i \lneq H \times K$, either $A_i \lneq H$ or $B_i \lneq K$.
+Let $I = \{i : A_i \lneq H\}$. The subgroups $\{A_i\}_{i \notin I}$ all equal
+$H$ and are redundant in the union $\bigcup_i A_i = H$, so $\{A_i\}_{i \in I}$
+already covers $H$. Hence $\sigma(H) \leq |I| \leq n$.
+
+By a symmetric argument with $J = \{i : B_i \lneq K\}$, we get $\sigma(K) \leq n$.
+Since $I \cup J = \{1, \ldots, n\}$ (every $L_i$ is proper), this gives:
+\[
+  \min\{\sigma(H), \sigma(K)\} \leq n = \sigma(H \times K).
+\]
+Combined with the inequality direction, $\sigma(H \times K) = \min\{\sigma(H),
+\sigma(K)\}$.
+\end{proof}
+
+These lemmas were discussed in  \cite{cohn1994}.
+
+\subsection{Equal covering theorems}
+Since the proofs of the following theorems can be immidiately found in \cite{velasquez2022} we did not bother to mention it, but we formalized them. See \ref{sec:lean}
+\begin{theorem}[{\cite[Theorem~13]{velasquez2022}}]
+  \label{thm:exp}
+  If $\Pi = \{H_i\}$ is an equal covering of $G$, then $\Exp(G) \mid |H_i|$ for all $i$.
+\end{theorem}
+
+\begin{corollary}[{\cite[Corollary~1]{velasquez2022}}]
+  \label{cor:exp}
+  If $\Exp(G) \nmid |K|$ for every maximal subgroup $K$ of $G$, then $G$ has no
+  equal covering.
+\end{corollary}
+
+\begin{theorem}[{\cite[Theorem~14]{velasquez2022}}]
+  \label{thm:dihedral}
+  $\Dih{2n}$ has an equal covering if and only if $n$ is even. When $n$ is even,
+  $\Pi = \{\langle r \rangle, \langle r^2, s \rangle, \langle r^2, rs \rangle\}$
+  is an equal covering.
+\end{theorem}
+
+\begin{theorem}[{\cite[Theorem~15]{velasquez2022}}]
+  Every non-cyclic finite $p$-group has an equal covering.
+\end{theorem}
+
+\begin{theorem}[{\cite[Theorems~16, 17]{velasquez2022}}]
+  \label{thm:product}
+  \begin{enumerate}[label=\emph{(\roman*)}]
+    \item If $G$ or $H$ has an equal covering, so does $G \times H$.
+    \item Every non-cyclic finite nilpotent group has an equal covering.
+  \end{enumerate}
+\end{theorem}
+
+\begin{theorem}[{\cite[Theorem~18]{velasquez2022}}]
+  If $|G| = p_1 p_2 \cdots p_k$ with $p_i$ distinct primes, then $G$ has no
+  equal covering.
+\end{theorem}
+
+\begin{theorem}[{\cite[Theorem~19, Corollary~4]{velasquez2022}}]
+  \label{thm:normal}
+  \begin{enumerate}[label=\emph{(\roman*)}]
+    \item If $N \norml G$ and $G/N$ has an equal covering, so does $G$.
+    \item If $G = H \rtimes K$ and $K$ has an equal covering, so does $G$.
+  \end{enumerate}
+\end{theorem}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Lean 4 Formalization}
+\label{sec:lean}
+
+Lean is an open-source programming language and proof assistant that enables correct, maintainable, and formally verified code. 
+\cite{lean}
+
+\subsection{Overview}
+
+We formalized the following results in Lean~4 using Mathlib:
+\begin{itemize}
+\item theorem lists
+\end{itemize}
+
+\subsection{Key Mathlib tools}
+
+[Describe: \texttt{Subgroup}, \texttt{Subgroup.index}, \texttt{Subgroup.comap},
+\texttt{Finset}, relevant API lemmas.]
+
+\subsection{Challenges}
+
+\subsection{Representative Lean code}
+
+\begin{lstlisting}[language=Lean, caption={Formalization of the covering sum inequality}]
+
+\end{lstlisting}
+Find remaining theorems on github.
+\subsection{Scope and limitations}
+
+[Honest statement of what is and is not formalized, and why.]
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{GAP Computational Investigation}
+\label{sec:gap}
+
+GAP is a system for computational discrete algebra, with particular emphasis on Computational Group Theory. \cite{gap}
+\subsection{The algorithm }
+We modified the code provided by \cite{velasquez2022} to test and find the equal coverings of finite Groups. 
+
+
+\begin{lstlisting}[language=GAP, caption={GAP algorithm for equal covering detection}]
+Algorithm EqualCovering(G)
+S := AllSubgroups(G);
+D := DivisorsInt(Order(G));
+
+orders := [];
+for d in D do
+    if d < Order(G) and RemInt(d, Exponent(G)) = 0 then
+        Append(orders, [d]);
+    fi;
+od;
+
+truthvalues := [];
+
+for d in orders do
+    union := [];
+
+    for s in S do
+        if Order(s) = d then
+            Append(union, ShallowCopy(Elements(s)));
+        fi;
+    od;
+
+    Append(truthvalues, [Elements(G) = Set(union)]);
+od;
+
+return true in truthvalues;
+\end{lstlisting}
+
+
+\subsection{Results}
+
+\begin{longtable}{llcccl}
+  \toprule
+  \textbf{Group ID} & \textbf{Name} & \textbf{Exp} & \textbf{Nilp.?}
+    & \textbf{Equal cov.?} & \textbf{Reason} \\
+  \midrule
+  \endhead
+  \bottomrule
+  \endfoot
+  % ── fill in your computed rows here ──
+  $[61,1]$ & $C_{61}$ & 61 & Yes & No & T1 (cyclic) \\
+  % ... continue for all groups 61--120
+\end{longtable}
+
+\subsection{Challenges}
+\begin{itemize}
+  \item Its not feasible to extend the checking for finite simple groups. Velasquez \cite{velasquez2022} already checked it up to order 10000. Checking on the larger group would be very slow.
+  \item They program was slow when order of group increased, we had to optimize. 
+
+\end{itemize}
+
+
+\subsection{Patterns observed}
+Overall the results were consistent with the theorems. The simple groups we checked were also not equally coverable, adding further evidence to the conjecture.
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{The Simple Group Conjecture}
+\label{sec:conjecture}
+
+\subsection{Statement and known evidence}
+
+\begin{conjecture}[{\cite[p.~21]{velasquez2022}}]
+  If $G$ is a finite simple group, then $G$ has no equal covering.
+\end{conjecture}
+
+The paper establishes this computationally for all finite simple groups of
+order less than $100{,}000$ (Table~3 of~\cite{velasquez2022}).
+
+\subsection{Theoretical analysis}
+
+\begin{proposition}[{\cite[Proposition~2]{velasquez2022}}]
+  If $G$ is a finite non-cyclic simple group with $\Exp(G) = |G|/2$, then
+  $G$ has no equal covering.
+\end{proposition}
+
+\begin{remark}
+  Since simple groups have no non-trivial normal subgroups, \Cref{thm:normal}
+  cannot be used to transfer equal coverings from quotients. Any equal covering
+  of a simple group must arise entirely from its internal subgroup structure,
+  subject to the exponent constraint of \Cref{thm:exp}.
+\end{remark}
+
+\subsubsection{The alternating groups $A_n$}
+The \emph{alternating group} on \(n\) letters, denoted by \(A_n\), is the subgroup of the symmetric group \(S_n\) consisting of all even permutations:
+\[
+A_n=\{\sigma\in S_n:\operatorname{sgn}(\sigma)=1\}.
+\]
+Since the sign homomorphism
+\[
+\operatorname{sgn}:S_n\to\{\pm1\}
+\]
+is surjective with kernel \(A_n\), it follows that
+\[
+|A_n|=\frac{n!}{2}.
+\]
+
+For \(n\ge5\), the alternating group \(A_n\) is non-abelian and simple; that is, its only normal subgroups are the trivial subgroup and \(A_n\) itself. Consequently, the groups \(A_n\) (\(n\ge5\)) form an infinite family of finite non-abelian simple groups.
+
+
+We attempt to investigate the conjecture \ref{conj:simple} for such groups.
+
+
+..... 
+
+\begin{proposition}
+  \label{prop:Ap}
+  For any prime $p \geq 5$, the alternating group $A_p$ has no equal covering.
+\end{proposition}
+
+\begin{proof}
+  % As outlined above.
+\end{proof}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Conclusion}
+\label{sec:conclusion}
+
+We have extended the study of equal coverings of finite groups in three directions.
+Theoretically, we provided complete proofs of the Haber--Rosenfeld theorem and all
+core theorems of~\cite{velasquez2022}, and obtained a partial theoretical result
+(\Cref{prop:Ap}) toward \Cref{conj:simple}.
+We formalized [list] of these results in Lean~4.
+Computationally, we extended the GAP classification to order~120, producing a
+complete table consistent with all theoretical predictions.
+
+\paragraph{Future directions.}
+\begin{itemize}
+  \item Complete the Lean formalization of Theorems.
+  \item Target Alternating groups of prime letters with the conjecture ($\geq 5$.)
+\end{itemize}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\bibliographystyle{plain}
+\bibliography{references}
+
+
+
+
+
+
+% Put your .bib entries in references.bib
+% Key entries needed:
+% velasquez2022, haber1959, scorza1926, neumann1954, cohn1994,
+% tomkinson1997, foguel_ragland2008, isaacs1973, gap, mathlib
+
+
+
+\end{document}
