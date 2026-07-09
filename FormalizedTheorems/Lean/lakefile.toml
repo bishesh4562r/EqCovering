@@ -1,0 +1,6 @@
+name = "EqualCovering"
+version = "0.1.0"
+defaultTargets = ["EqualCovering"]
+
+[[lean_lib]]
+name = "EqualCovering"
