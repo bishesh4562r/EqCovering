@@ -65,20 +65,22 @@ end;
 
 # ============================================================
 #  Fast coverage check (hash map + early exit)
+#  FIXED: use a record for element->position mapping, 
+#  because group elements are not valid list indices.
 # ============================================================
 EC_CoversGroupFast := function(subs, G)
     local elementMap, covered, count, s, e, pos, n;
-    elementMap := [];
+    elementMap := rec();
     n := 0;
     for e in G do
         n := n + 1;
-        elementMap[e] := n;
+        elementMap.(String(e)) := n;
     od;
     covered := BlistList([1 .. n], []);
     count := 0;
     for s in subs do
         for e in AsSet(s) do
-            pos := elementMap[e];
+            pos := elementMap.(String(e));
             if not covered[pos] then
                 covered[pos] := true;
                 count := count + 1;
@@ -98,7 +100,11 @@ EC_EqualCoveringCache := rec();
 
 EC_HasEqualCovering := function(G)
     local key, candidates, buckets, d;
-    key := String(Order(G)) * ":" * String(IdGroup(G));
+    if Order(G) = 1 then
+        return false;
+    fi;
+    # ---- FIX: use Concatenation instead of "*" ----
+    key := Concatenation(String(Order(G)), ":", String(IdGroup(G)));
     if IsBound(EC_EqualCoveringCache.(key)) then
         return EC_EqualCoveringCache.(key);
     fi;
@@ -136,7 +142,7 @@ end;
 #  ShowCovering
 # ============================================================
 EC_ShowCovering := function(G)
-    local candidates, buckets, d, key, subs, i;
+    local candidates, buckets, d, key, subs, i, result;
 
     Print("\n");
     Print("============================================================\n");
@@ -150,51 +156,38 @@ EC_ShowCovering := function(G)
         return fail;
     fi;
 
-    if EC_KnownYes(G) then
-        Print("Result   : *** EQUAL COVERING EXISTS *** (by theorem)\n");
-        Print("============================================================\n\n");
-        return true;
-    fi;
-
-    if EC_KnownNo(G) then
-        Print("Result   : No equal covering (by theorem)\n");
-        Print("============================================================\n\n");
-        return false;
-    fi;
-
-    candidates := EC_CandidateOrders(G);
-    if Length(candidates) = 0 then
-        Print("Result   : No valid candidate orders — no equal covering\n");
-        Print("============================================================\n\n");
-        return false;
-    fi;
-
-    buckets := EC_SubgroupsByOrder(G);
-
-    for d in candidates do
-        key := String(d);
-        if IsBound(buckets.(key)) then
-            subs := buckets.(key);
-            if EC_CoversGroupFast(subs, G) then
-                Print("Result   : *** EQUAL COVERING FOUND ***\n");
-                Print("------------------------------------------------------------\n");
-                Print("Covering subgroup order : ", d, "\n");
-                Print("Number of subgroups     : ", Length(subs), "\n");
-                Print("------------------------------------------------------------\n");
-                for i in [1 .. Length(subs)] do
-                    Print("  Subgroup ", i, " : ", StructureDescription(subs[i]), "\n");
-                    Print("  Elements  : ", AsSet(subs[i]), "\n");
-                    Print("\n");
-                od;
-                Print("============================================================\n\n");
-                return true;
+    result := EC_HasEqualCovering(G);
+    if result = true then
+        candidates := EC_CandidateOrders(G);
+        buckets := EC_SubgroupsByOrder(G);
+        for d in candidates do
+            key := String(d);
+            if IsBound(buckets.(key)) then
+                subs := buckets.(key);
+                if EC_CoversGroupFast(subs, G) then
+                    Print("Result   : *** EQUAL COVERING FOUND ***\n");
+                    Print("------------------------------------------------------------\n");
+                    Print("Covering subgroup order : ", d, "\n");
+                    Print("Number of subgroups     : ", Length(subs), "\n");
+                    Print("------------------------------------------------------------\n");
+                    for i in [1 .. Length(subs)] do
+                        Print("  Subgroup ", i, " : ", StructureDescription(subs[i]), "\n");
+                        Print("  Elements  : ", AsSet(subs[i]), "\n");
+                        Print("\n");
+                    od;
+                    Print("============================================================\n\n");
+                    return true;
+                fi;
             fi;
-        fi;
-    od;
-
-    Print("Result   : No equal covering exists for this group\n");
-    Print("============================================================\n\n");
-    return false;
+        od;
+        Print("Result   : *** ERROR: inconsistent cache ***\n");
+        Print("============================================================\n\n");
+        return fail;
+    else
+        Print("Result   : No equal covering exists for this group\n");
+        Print("============================================================\n\n");
+        return false;
+    fi;
 end;
 
 # ============================================================
@@ -211,10 +204,7 @@ EC_ScanRange := function(lo, hi)
     Print("  SCANNING GROUPS: order ", lo, " to ", hi, "\n");
     Print("  (optimised with theorems, caching, fast coverage)\n");
     Print("============================================================\n");
-    Print(String("Order", 7), "  ",
-          String("ID",   4), "  ",
-          String("Group",          20), "  ",
-          "Equal Covering?\n");
+    Print("Order  ID    Group                Equal Covering?\n");
     Print("------------------------------------------------------------\n");
 
     for n in [lo .. hi] do
@@ -230,9 +220,9 @@ EC_ScanRange := function(lo, hi)
                 result := "no";
                 total_no  := total_no  + 1;
             fi;
-            Print(String(n,       7), "  ",
-                  String(k,       4), "  ",
-                  String(StructureDescription(G), 20), "  ",
+            Print(String(n), "  ",
+                  String(k), "  ",
+                  StructureDescription(G), "  ",
                   result, "\n");
         od;
     od;
