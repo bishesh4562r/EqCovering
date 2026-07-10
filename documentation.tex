@@ -554,24 +554,141 @@ Since the proofs of the following theorems can be immidiately found in \cite{vel
 \section{Lean 4 Formalization}
 \label{sec:lean}
 
-Lean is an open-source programming language and proof assistant that enables correct, maintainable, and formally verified code. 
+Lean is an open-source programming language and proof assistant that enables correct, maintainable, and formally verified code.
+Lean is interactive theorem prover based on dependent tyoe theory designed especially for mathematics and software verification , with its core type theory expressive
+
 \cite{lean}
 
 \subsection{Overview}
-
-We formalized the following results in Lean~4 using Mathlib:
+We formalized the following results in Lean~4:
 \begin{itemize}
-\item theorem lists
+  \item \textbf{Theorem 1.} A group $G$ has a covering if and only if $G$
+    is non-cyclic (both directions, including an explicit construction of
+    the covering $\{\langle x \rangle : x \in G\}$ in the reverse direction).
+  \item \textbf{Theorem 2.} No group is the union of two proper subgroups,
+    i.e.\ $\sigma(G) \neq 2$.
+  \item \textbf{Theorem 13.} If $\Pi = \{H_i\}$ is an equal covering of $G$,
+    then $\exp(G) \mid |H_i|$ for every $H_i \in \Pi$.
+  \item \textbf{Corollary 1.} If $\exp(G) \nmid |K|$ for every maximal
+    subgroup $K$ of $G$, then $G$ has no equal covering.
+  \item \textbf{Theorem 16.} If $G$ has an equal covering, then so does
+    $G \times H$ for any group $H$ (via an explicit product-subgroup
+    construction).
+  \item \textbf{Theorem 19.} If $f : G \twoheadrightarrow Q$ is a surjective
+    homomorphism and $Q$ has an equal covering, then $G$ has an equal
+    covering, obtained by pulling the covering back along $f$.
 \end{itemize}
+Theorems 15 and 17 (every non-cyclic $p$-group, resp.\ nilpotent group, has
+an equal covering) are currently stated as \texttt{axiom}s with the correct
+type signature, pending a full proof; see \S\ref{sec:scope}.
 
 \subsection{Key Mathlib tools}
+Rather than importing Mathlib's \texttt{Subgroup} API directly, we built a
+small self-contained algebraic core mirroring it, so that the intended
+correspondence to Mathlib is explicit:
+\begin{itemize}
+  \item \texttt{Group}, \texttt{IsSubgroup}, and \texttt{Subgroup} play the
+    role of Mathlib's \texttt{Group} and \texttt{Subgroup}, with membership
+    given by a predicate \texttt{subset : $\alpha \to$ Prop} rather than a
+    \texttt{SetLike} coercion.
+  \item \texttt{Covering} and \texttt{EqualCovering} package a family of
+    proper subgroups indexed by \texttt{i : I}, together with the covering
+    property (\texttt{covers}) and, for equal coverings, a proof that all
+    members have the same \texttt{Size}.
+  \item \texttt{order\_subgroup}, \texttt{exp}, and \texttt{order\_elem}
+    stand in for Mathlib's \texttt{Nat.card} and
+    \texttt{Monoid.exponent}, together with an axiomatized
+    \texttt{lagrange} lemma (order of an element divides the order of any
+    subgroup containing it) and \texttt{exp\_divides} (the exponent is the
+    least common multiple of element orders, expressed via divisibility).
+  \item \texttt{MaxSubgroup} and \texttt{divides\_max} formalize maximality
+    and the fact that every subgroup embeds in some maximal subgroup, used
+    for Corollary 1.
+  \item \texttt{DirectProduct} and \texttt{ProdSubgroup} construct the
+    product group $G \times H$ and lift a subgroup of $G$ to a subgroup of
+    $G \times H$, used in Theorem 16.
+  \item \texttt{Homomorphism}, \texttt{Surjective}, and
+    \texttt{PreimageSubgroup} formalize group homomorphisms and preimages of
+    subgroups under a surjection, used in Theorem 19.
+\end{itemize}
 
 [Describe: \texttt{Subgroup}, \texttt{Subgroup.index}, \texttt{Subgroup.comap},
 \texttt{Finset}, relevant API lemmas.]
 
 \subsection{Challenges}
+\begin{itemize}
+  \item \textbf{Axiomatizing rather than importing.} To keep the
+    formalization self-contained and readable, we defined our own
+    \texttt{Group}/\texttt{Subgroup} structures instead of using Mathlib's,
+    which meant re-axiomatizing standard facts (Lagrange's theorem, the
+    exponent--order relationship) rather than reusing proofs already in
+    Mathlib. This trades a shorter file for a formalization that is not yet
+    literally checked against Mathlib's group theory.
+  \item \textbf{Order as a type, not a number.} We initially represented the
+    order of a subgroup with an abstract \texttt{Size : Subgroup G $\to$
+    Type u} to sidestep finiteness assumptions; this was later replaced by
+    a numeric \texttt{order\_subgroup : Subgroup G $\to$ Nat} for the
+    finite-group results (Theorem 13 onward), which is closer to Mathlib's
+    \texttt{Nat.card} but required threading finiteness hypotheses through
+    every subsequent lemma.
+  \item \textbf{Case-heavy classical proofs.} Results like Scorza's theorem
+    (Theorem~3.4, $\sigma(G)=3 \iff G/N \cong C_2\times C_2$) rely on
+    case splits over coset membership that are easy to write on paper but
+    require careful use of \texttt{Classical.byContradiction} and explicit
+    witness extraction in Lean, since the underlying group is not assumed
+    decidable.
+  \item \textbf{Quotients and the Correspondence Theorem.} Theorem 19
+    required formalizing preimages of subgroups under a homomorphism from
+    scratch (\texttt{PreimageSubgroup}), since we do not yet have quotient
+    groups formalized in this file; a full treatment of Theorem 19(ii)
+    (via $G = H \rtimes K$) is left for future work.
+\end{itemize}
 
 \subsection{Representative Lean code}
+The proof that no group is the union of two proper subgroups
+(Theorem~2) illustrates the style of the formalization:
+
+\begin{lstlisting}[caption={Formalization of Theorem 2: $\sigma(G) \neq 2$}]
+theorem theorem2 {alpha : Type u} (G : Group alpha) (H K : Subgroup G)
+  (pH : IsProper H) (pK : IsProper K) :
+  Not (forall x, H.subset x or K.subset x) := by
+  intro covers
+  rcases pH with <k, hk_not_H>
+  rcases pK with <h, hh_not_K>
+  have hk_K : K.subset k := by
+    cases covers k with
+    | inl h_in => contradiction
+    | inr k_in => exact k_in
+  have hh_H : H.subset h := by
+    cases covers h with
+    | inl h_in => exact h_in
+    | inr k_in => contradiction
+  have h_mul_k := covers (G.mul h k)
+  cases h_mul_k with
+  | inl h_in =>
+    have k_in_H := cancel_lemma H h k hh_H h_in
+    contradiction
+  | inr k_in =>
+    have h_in_K := cancel_lemma2 K h k hk_K k_in
+    contradiction
+\end{lstlisting}
+
+The proof that equal coverings force the exponent of $G$ to divide the
+order of every member (Theorem~13) shows how \texttt{Lagrange} and
+\texttt{exp\_divides} compose:
+
+\begin{lstlisting}[caption={Formalization of Theorem 13}]
+theorem theorem13 {alpha : Type u} {G : Group alpha} {I : Type u}
+  (eqCov : FiniteEqualCovering G I) (i : I) :
+  exp G Divides order_subgroup (eqCov.cov.sub i) := by
+  apply exp_divides
+  intro x
+  have <j, x_in_j> := eqCov.cov.covers x
+  have lag := lagrange (eqCov.cov.sub j) x x_in_j
+  have eq_sz := eqCov.equalSz j i
+  rw [<- eq_sz]
+  exact lag
+\end{lstlisting}
 
 \begin{lstlisting}[language=Lean, caption={Formalization of the covering sum inequality}]
 
