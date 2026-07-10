@@ -693,17 +693,25 @@ For \(n\ge5\), the alternating group \(A_n\) is non-abelian and simple; that is,
 We attempt to investigate the conjecture \ref{conj:simple} for such groups.
 
 
-..... 
 
-\begin{proposition}
+\begin{conjecture}
   \label{prop:Ap}
   For any prime $p \geq 5$, the alternating group $A_p$ has no equal covering.
-\end{proposition}
-
-\begin{proof}
-  % As outlined above.
-\end{proof}
-
+\end{conjecture}
+This is a simpler case of \ref{conj:simple}.
+We outline an approach toward showing that $A_p$ has no equal covering
+for $p \geq 5$ prime. Suppose for contradiction that $A_p$ admits an
+equal covering. By \Cref{cor:exp}, every member $H$ of the covering must
+satisfy $\exp(A_p) \mid |H|$. Since $p \mid \exp(A_p)$, we have $p \mid
+|H|$, so $H$ contains a Sylow $p$-subgroup of order $p$.
+ 
+The contradiction would follow from either of two routes: showing that
+any such Sylow $p$-subgroup must be normal in $A_p$, contradicting
+simplicity; or showing that no maximal subgroup of $A_p$ can contain a
+Sylow $p$-subgroup at all. Both routes require a closer analysis of the
+Sylow structure and maximal subgroup lattice of $A_p$, which we leave as
+a direction for future work.
+ 
 % ══════════════════════════════════════════════════════════════════════════════
 \section{Conclusion}
 \label{sec:conclusion}
