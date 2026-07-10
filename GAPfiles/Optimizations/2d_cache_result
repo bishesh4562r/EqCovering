@@ -1,0 +1,38 @@
+# ---- 2d ----
+EqualCoveringCache := rec();
+
+HasEqualCovering := function(G)
+    local key, candidates, buckets, d, subs;
+    key := String(Order(G)) * ":" * String(IdGroup(G));
+    if IsBound(EqualCoveringCache.(key)) then
+        return EqualCoveringCache.(key);
+    fi;
+    if KnownYes(G) then
+        EqualCoveringCache.(key) := true;
+        return true;
+    fi;
+    if KnownNo(G) then
+        EqualCoveringCache.(key) := false;
+        return false;
+    fi;
+    if IsCyclic(G) then
+        EqualCoveringCache.(key) := false;
+        return false;
+    fi;
+    candidates := CandidateOrders(G);
+    if Length(candidates) = 0 then
+        EqualCoveringCache.(key) := false;
+        return false;
+    fi;
+    buckets := SubgroupsByOrder(G);
+    for d in candidates do
+        if IsBound(buckets.(String(d))) then
+            if CoversGroupFast(buckets.(String(d)), G) then
+                EqualCoveringCache.(key) := true;
+                return true;
+            fi;
+        fi;
+    od;
+    EqualCoveringCache.(key) := false;
+    return false;
+end;

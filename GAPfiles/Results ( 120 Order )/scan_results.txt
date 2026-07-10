@@ -1,0 +1,1254 @@
+gap> ScanRange(1, 120);
+
+============================================================
+  SCANNING GROUPS: order 1 to 120
+  (Reproducing Velasquez-Berroteran 2022, aiming past 60)
+============================================================
+  Order    ID                 Group  Equal Covering?
+------------------------------------------------------------
+      1     1                     1  cyclic — skip
+      2     1                    C2  cyclic — skip
+      3     1                    C3  cyclic — skip
+      4     1                    C4  cyclic — skip
+      4     2               C2 x C2  YES
+      5     1                    C5  cyclic — skip
+      6     1                    S3  no
+      6     2                    C6  cyclic — skip
+      7     1                    C7  cyclic — skip
+      8     1                    C8  cyclic — skip
+      8     2               C4 x C2  YES
+      8     3                    D8  YES
+      8     4                    Q8  YES
+      8     5          C2 x C2 x C2  YES
+      9     1                    C9  cyclic — skip
+      9     2               C3 x C3  YES
+     10     1                   D10  no
+     10     2                   C10  cyclic — skip
+     11     1                   C11  cyclic — skip
+     12     1               C3 : C4  no
+     12     2                   C12  cyclic — skip
+     12     3                    A4  no
+     12     4                   D12  YES
+     12     5               C6 x C2  YES
+     13     1                   C13  cyclic — skip
+     14     1                   D14  no
+     14     2                   C14  cyclic — skip
+     15     1                   C15  cyclic — skip
+     16     1                   C16  cyclic — skip
+     16     2               C4 x C4  YES
+     16     3        (C4 x C2) : C2  YES
+     16     4               C4 : C4  YES
+     16     5               C8 x C2  YES
+     16     6               C8 : C2  YES
+     16     7                   D16  YES
+     16     8                  QD16  YES
+     16     9                   Q16  YES
+     16    10          C4 x C2 x C2  YES
+     16    11               C2 x D8  YES
+     16    12               C2 x Q8  YES
+     16    13        (C4 x C2) : C2  YES
+     16    14     C2 x C2 x C2 x C2  YES
+     17     1                   C17  cyclic — skip
+     18     1                   D18  no
+     18     2                   C18  cyclic — skip
+     18     3               C3 x S3  no
+     18     4        (C3 x C3) : C2  YES
+     18     5               C6 x C3  YES
+     19     1                   C19  cyclic — skip
+     20     1               C5 : C4  no
+     20     2                   C20  cyclic — skip
+     20     3               C5 : C4  no
+     20     4                   D20  YES
+     20     5              C10 x C2  YES
+     21     1               C7 : C3  no
+     21     2                   C21  cyclic — skip
+     22     1                   D22  no
+     22     2                   C22  cyclic — skip
+     23     1                   C23  cyclic — skip
+     24     1               C3 : C8  no
+     24     2                   C24  cyclic — skip
+     24     3               SL(2,3)  no
+     24     4               C3 : Q8  YES
+     24     5               C4 x S3  YES
+     24     6                   D24  YES
+     24     7        C2 x (C3 : C4)  YES
+     24     8        (C6 x C2) : C2  YES
+     24     9              C12 x C2  YES
+     24    10               C3 x D8  YES
+     24    11               C3 x Q8  YES
+     24    12                    S4  no
+     24    13               C2 x A4  no
+     24    14          C2 x C2 x S3  YES
+     24    15          C6 x C2 x C2  YES
+     25     1                   C25  cyclic — skip
+     25     2               C5 x C5  YES
+     26     1                   D26  no
+     26     2                   C26  cyclic — skip
+     27     1                   C27  cyclic — skip
+     27     2               C9 x C3  YES
+     27     3        (C3 x C3) : C3  YES
+     27     4               C9 : C3  YES
+     27     5          C3 x C3 x C3  YES
+     28     1               C7 : C4  no
+     28     2                   C28  cyclic — skip
+     28     3                   D28  YES
+     28     4              C14 x C2  YES
+     29     1                   C29  cyclic — skip
+     30     1               C5 x S3  no
+     30     2              C3 x D10  no
+     30     3                   D30  no
+     30     4                   C30  cyclic — skip
+     31     1                   C31  cyclic — skip
+     32     1                   C32  cyclic — skip
+     32     2        (C4 x C2) : C4  YES
+     32     3               C8 x C4  YES
+     32     4               C8 : C4  YES
+     32     5        (C8 x C2) : C2  YES
+     32     6   (C2 x C2 x C2) : C4  YES
+     32     7        (C8 : C2) : C2  YES
+     32     8  C2 . ((C4 x C2) : C2) = (C2 x C2) . (C4 x C2)  YES
+     32     9        (C8 x C2) : C2  YES
+     32    10               Q8 : C4  YES
+     32    11        (C4 x C4) : C2  YES
+     32    12               C4 : C8  YES
+     32    13               C8 : C4  YES
+     32    14               C8 : C4  YES
+     32    15  C4 . D8 = C4 . (C4 x C2)  YES
+     32    16              C16 x C2  YES
+     32    17              C16 : C2  YES
+     32    18                   D32  YES
+     32    19                  QD32  YES
+     32    20                   Q32  YES
+     32    21          C4 x C4 x C2  YES
+     32    22  C2 x ((C4 x C2) : C2)  YES
+     32    23        C2 x (C4 : C4)  YES
+     32    24        (C4 x C4) : C2  YES
+     32    25               C4 x D8  YES
+     32    26               C4 x Q8  YES
+     32    27  (C2 x C2 x C2 x C2) : C2  YES
+     32    28   (C4 x C2 x C2) : C2  YES
+     32    29        (C2 x Q8) : C2  YES
+     32    30   (C4 x C2 x C2) : C2  YES
+     32    31        (C4 x C4) : C2  YES
+     32    32  (C2 x C2) . (C2 x C2 x C2)  YES
+     32    33        (C4 x C4) : C2  YES
+     32    34        (C4 x C4) : C2  YES
+     32    35               C4 : Q8  YES
+     32    36          C8 x C2 x C2  YES
+     32    37        C2 x (C8 : C2)  YES
+     32    38        (C8 x C2) : C2  YES
+     32    39              C2 x D16  YES
+     32    40             C2 x QD16  YES
+     32    41              C2 x Q16  YES
+     32    42        (C8 x C2) : C2  YES
+     32    43        C8 : (C2 x C2)  YES
+     32    44        (C2 x Q8) : C2  YES
+     32    45     C4 x C2 x C2 x C2  YES
+     32    46          C2 x C2 x D8  YES
+     32    47          C2 x C2 x Q8  YES
+     32    48  C2 x ((C4 x C2) : C2)  YES
+     32    49  (C2 x C2 x C2) : (C2 x C2)  YES
+     32    50        (C2 x Q8) : C2  YES
+     32    51  C2 x C2 x C2 x C2 x C2  YES
+     33     1                   C33  cyclic — skip
+     34     1                   D34  no
+     34     2                   C34  cyclic — skip
+     35     1                   C35  cyclic — skip
+     36     1               C9 : C4  no
+     36     2                   C36  cyclic — skip
+     36     3        (C2 x C2) : C9  no
+     36     4                   D36  YES
+     36     5              C18 x C2  YES
+     36     6        C3 x (C3 : C4)  no
+     36     7        (C3 x C3) : C4  YES
+     36     8              C12 x C3  YES
+     36     9        (C3 x C3) : C4  no
+     36    10               S3 x S3  YES
+     36    11               C3 x A4  YES
+     36    12               C6 x S3  YES
+     36    13  C2 x ((C3 x C3) : C2)  YES
+     36    14               C6 x C6  YES
+     37     1                   C37  cyclic — skip
+     38     1                   D38  no
+     38     2                   C38  cyclic — skip
+     39     1              C13 : C3  no
+     39     2                   C39  cyclic — skip
+     40     1               C5 : C8  no
+     40     2                   C40  cyclic — skip
+     40     3               C5 : C8  no
+     40     4               C5 : Q8  YES
+     40     5              C4 x D10  YES
+     40     6                   D40  YES
+     40     7        C2 x (C5 : C4)  YES
+     40     8       (C10 x C2) : C2  YES
+     40     9              C20 x C2  YES
+     40    10               C5 x D8  YES
+     40    11               C5 x Q8  YES
+     40    12        C2 x (C5 : C4)  YES
+     40    13         C2 x C2 x D10  YES
+     40    14         C10 x C2 x C2  YES
+     41     1                   C41  cyclic — skip
+     42     1               C7 : C6  no
+     42     2        C2 x (C7 : C3)  no
+     42     3               C7 x S3  no
+     42     4              C3 x D14  no
+     42     5                   D42  no
+     42     6                   C42  cyclic — skip
+     43     1                   C43  cyclic — skip
+     44     1              C11 : C4  no
+     44     2                   C44  cyclic — skip
+     44     3                   D44  YES
+     44     4              C22 x C2  YES
+     45     1                   C45  cyclic — skip
+     45     2              C15 x C3  YES
+     46     1                   D46  no
+     46     2                   C46  cyclic — skip
+     47     1                   C47  cyclic — skip
+     48     1              C3 : C16  no
+     48     2                   C48  cyclic — skip
+     48     3        (C4 x C4) : C3  no
+     48     4               C8 x S3  YES
+     48     5              C24 : C2  YES
+     48     6              C24 : C2  YES
+     48     7                   D48  YES
+     48     8              C3 : Q16  YES
+     48     9        C2 x (C3 : C8)  YES
+     48    10        (C3 : C8) : C2  YES
+     48    11        C4 x (C3 : C4)  YES
+     48    12        (C3 : C4) : C4  YES
+     48    13              C12 : C4  YES
+     48    14       (C12 x C2) : C2  YES
+     48    15        (C3 x D8) : C2  YES
+     48    16        (C3 : Q8) : C2  YES
+     48    17        (C3 x Q8) : C2  YES
+     48    18              C3 : Q16  YES
+     48    19        (C6 x C2) : C4  YES
+     48    20              C12 x C4  YES
+     48    21  C3 x ((C4 x C2) : C2)  YES
+     48    22        C3 x (C4 : C4)  YES
+     48    23              C24 x C2  YES
+     48    24        C3 x (C8 : C2)  YES
+     48    25              C3 x D16  YES
+     48    26             C3 x QD16  YES
+     48    27              C3 x Q16  YES
+     48    28  C2 . S4 = SL(2,3) . C2  no
+     48    29               GL(2,3)  no
+     48    30               A4 : C4  no
+     48    31               C4 x A4  no
+     48    32          C2 x SL(2,3)  no
+     48    33  ((C4 x C2) : C2) : C3  no
+     48    34        C2 x (C3 : Q8)  YES
+     48    35          C2 x C4 x S3  YES
+     48    36              C2 x D24  YES
+     48    37       (C12 x C2) : C2  YES
+     48    38               D8 x S3  YES
+     48    39        (C4 x S3) : C2  YES
+     48    40               Q8 x S3  YES
+     48    41        (C4 x S3) : C2  YES
+     48    42   C2 x C2 x (C3 : C4)  YES
+     48    43  C2 x ((C6 x C2) : C2)  YES
+     48    44         C12 x C2 x C2  YES
+     48    45               C6 x D8  YES
+     48    46               C6 x Q8  YES
+     48    47  C3 x ((C4 x C2) : C2)  YES
+     48    48               C2 x S4  YES
+     48    49          C2 x C2 x A4  YES
+     48    50  (C2 x C2 x C2 x C2) : C3  YES
+     48    51     C2 x C2 x C2 x S3  YES
+     48    52     C6 x C2 x C2 x C2  YES
+     49     1                   C49  cyclic — skip
+     49     2               C7 x C7  YES
+     50     1                   D50  no
+     50     2                   C50  cyclic — skip
+     50     3              C5 x D10  no
+     50     4        (C5 x C5) : C2  YES
+     50     5              C10 x C5  YES
+     51     1                   C51  cyclic — skip
+     52     1              C13 : C4  no
+     52     2                   C52  cyclic — skip
+     52     3              C13 : C4  no
+     52     4                   D52  YES
+     52     5              C26 x C2  YES
+     53     1                   C53  cyclic — skip
+     54     1                   D54  no
+     54     2                   C54  cyclic — skip
+     54     3              C3 x D18  no
+     54     4               C9 x S3  no
+     54     5        (C3 x C3) : C6  no
+     54     6               C9 : C6  no
+     54     7        (C9 x C3) : C2  YES
+     54     8  ((C3 x C3) : C3) : C2  YES
+     54     9              C18 x C3  YES
+     54    10  C2 x ((C3 x C3) : C3)  YES
+     54    11        C2 x (C9 : C3)  YES
+     54    12          C3 x C3 x S3  YES
+     54    13  C3 x ((C3 x C3) : C2)  YES
+     54    14   (C3 x C3 x C3) : C2  YES
+     54    15          C6 x C3 x C3  YES
+     55     1              C11 : C5  no
+     55     2                   C55  cyclic — skip
+     56     1               C7 : C8  no
+     56     2                   C56  cyclic — skip
+     56     3               C7 : Q8  YES
+     56     4              C4 x D14  YES
+     56     5                   D56  YES
+     56     6        C2 x (C7 : C4)  YES
+     56     7       (C14 x C2) : C2  YES
+     56     8              C28 x C2  YES
+     56     9               C7 x D8  YES
+     56    10               C7 x Q8  YES
+     56    11   (C2 x C2 x C2) : C7  no
+     56    12         C2 x C2 x D14  YES
+     56    13         C14 x C2 x C2  YES
+     57     1              C19 : C3  no
+     57     2                   C57  cyclic — skip
+     58     1                   D58  no
+     58     2                   C58  cyclic — skip
+     59     1                   C59  cyclic — skip
+     60     1        C5 x (C3 : C4)  no
+     60     2        C3 x (C5 : C4)  no
+     60     3              C15 : C4  no
+     60     4                   C60  cyclic — skip
+     60     5                    A5  no
+     60     6        C3 x (C5 : C4)  no
+     60     7              C15 : C4  no
+     60     8              S3 x D10  YES
+     60     9               C5 x A4  no
+     60    10              C6 x D10  YES
+     60    11              C10 x S3  YES
+     60    12                   D60  YES
+     60    13              C30 x C2  YES
+     61     1                   C61  cyclic — skip
+     62     1                   D62  no
+     62     2                   C62  cyclic — skip
+     63     1               C7 : C9  no
+     63     2                   C63  cyclic — skip
+     63     3        C3 x (C7 : C3)  YES
+     63     4              C21 x C3  YES
+     64     1                   C64  cyclic — skip
+     64     2               C8 x C8  YES
+     64     3               C8 : C8  YES
+     64     4   (C2 x C2 x C2) : C8  YES
+     64     5        (C4 x C2) : C8  YES
+     64     6               D8 : C8  YES
+     64     7               Q8 : C8  YES
+     64     8        (C4 : C4) : C4  YES
+     64     9        (C2 x Q8) : C4  YES
+     64    10        (C8 : C4) : C2  YES
+     64    11  (C2 x C2) . ((C4 x C2) : C2) = (C4 x C2) . (C4 x C2)  YES
+     64    12        (C4 : C8) : C2  YES
+     64    13  (C2 x C2) . ((C4 x C2) : C2) = (C4 x C2) . (C4 x C2)  YES
+     64    14  (C2 x C2) . ((C4 x C2) : C2) = (C4 x C2) . (C4 x C2)  YES
+     64    15               C8 : C8  YES
+     64    16               C8 : C8  YES
+     64    17        (C4 x C2) : C8  YES
+     64    18        (C8 x C2) : C4  YES
+     64    19        C4 . (C4 x C4)  YES
+     64    20        (C8 : C2) : C4  YES
+     64    21        (C4 : C4) : C4  YES
+     64    22  (C4 x C2) . D8 = C4 . (C4 x C4)  YES
+     64    23  ((C4 x C2) : C2) : C4  YES
+     64    24        (C8 : C2) : C4  YES
+     64    25        (C8 : C2) : C4  YES
+     64    26              C16 x C4  YES
+     64    27              C16 : C4  YES
+     64    28              C16 : C4  YES
+     64    29       (C2 x C2) : C16  YES
+     64    30       (C16 : C2) : C2  YES
+     64    31       (C16 : C2) : C2  YES
+     64    32  ((C4 x C2) : C2) : C4  YES
+     64    33  ((C4 x C2) : C2) : C4  YES
+     64    34        (C4 x C4) : C4  YES
+     64    35        (C4 x C4) : C4  YES
+     64    36  (C2 . ((C4 x C2) : C2) = (C2 x C2) . (C4 x C2)) : C2  YES
+     64    37  C2 . ((C2 x C2 x C2) : C4) = (C4 x C2) . (C4 x C2)  YES
+     64    38              D16 : C4  YES
+     64    39              Q16 : C4  YES
+     64    40       (C16 x C2) : C2  YES
+     64    41              Q16 : C4  YES
+     64    42       (C16 : C2) : C2  YES
+     64    43  C2 . ((C8 x C2) : C2) = C8 . (C4 x C2)  YES
+     64    44              C4 : C16  YES
+     64    45  C8 . D8 = C4 . (C8 x C2)  YES
+     64    46              C16 : C4  YES
+     64    47              C16 : C4  YES
+     64    48              C16 : C4  YES
+     64    49  C4 . D16 = C8 . (C4 x C2)  YES
+     64    50              C32 x C2  YES
+     64    51              C32 : C2  YES
+     64    52                   D64  YES
+     64    53                  QD64  YES
+     64    54                   Q64  YES
+     64    55          C4 x C4 x C4  YES
+     64    56  C2 x ((C4 x C2) : C4)  YES
+     64    57        (C4 x C4) : C4  YES
+     64    58  C4 x ((C4 x C2) : C2)  YES
+     64    59        C4 x (C4 : C4)  YES
+     64    60  (C2 x C2) : ((C4 x C2) : C2)  YES
+     64    61  C4 : ((C4 x C2) : C2)  YES
+     64    62   (C4 x C2 x C2) : C4  YES
+     64    63        (C4 x C4) : C4  YES
+     64    64        (C4 x C4) : C4  YES
+     64    65        C4 : (C4 : C4)  YES
+     64    66  (C2 x C2) : (C4 : C4)  YES
+     64    67  (C2 x C2) : ((C4 x C2) : C2)  YES
+     64    68        (C4 : C4) : C4  YES
+     64    69  ((C4 x C2) : C2) : C4  YES
+     64    70        C4 : (C4 : C4)  YES
+     64    71  C4 : ((C4 x C2) : C2)  YES
+     64    72        (C4 x C2) : Q8  YES
+     64    73        (C4 x C2) : D8  YES
+     64    74   (C2 x C2 x C2) : Q8  YES
+     64    75        (C4 x C2) : D8  YES
+     64    76        (C4 x C2) : Q8  YES
+     64    77  ((C4 x C2) : C4) : C2  YES
+     64    78  ((C4 x C2) : C4) : C2  YES
+     64    79  (C2 x C2 x C2) . (C2 x C2 x C2)  YES
+     64    80  (C2 x (C4 : C4)) : C2  YES
+     64    81  (C2 x C2 x C2) . (C2 x C2 x C2)  YES
+     64    82  (C2 x C2 x C2) . (C2 x C2 x C2)  YES
+     64    83          C8 x C4 x C2  YES
+     64    84        C2 x (C8 : C4)  YES
+     64    85        C4 x (C8 : C2)  YES
+     64    86        (C8 : C2) : C4  YES
+     64    87  C2 x ((C8 x C2) : C2)  YES
+     64    88  (C2 x C2) : (C8 : C2)  YES
+     64    89  ((C8 x C2) : C2) : C2  YES
+     64    90  C2 x ((C2 x C2 x C2) : C4)  YES
+     64    91        (C2 x Q8) : C4  YES
+     64    92  C2 x ((C8 : C2) : C2)  YES
+     64    93  C2 x (C2 . ((C4 x C2) : C2) = (C2 x C2) . (C4 x C2))  YES
+     64    94  (C2 . ((C4 x C2) : C2) = (C2 x C2) . (C4 x C2)) : C2  YES
+     64    95  C2 x ((C8 x C2) : C2)  YES
+     64    96        C2 x (Q8 : C4)  YES
+     64    97  ((C4 x C2) : C2) : C4  YES
+     64    98        Q8 : (C4 x C2)  YES
+     64    99        (C2 x D8) : C4  YES
+     64   100        (C2 x Q8) : C4  YES
+     64   101  C2 x ((C4 x C4) : C2)  YES
+     64   102        (C2 x Q8) : C4  YES
+     64   103        C2 x (C4 : C8)  YES
+     64   104        C4 : (C8 : C2)  YES
+     64   105        (C4 : C8) : C2  YES
+     64   106        C2 x (C8 : C4)  YES
+     64   107        C2 x (C8 : C4)  YES
+     64   108        (C8 x C2) : C4  YES
+     64   109        C8 : (C4 x C2)  YES
+     64   110  C2 x (C4 . D8 = C4 . (C4 x C2))  YES
+     64   111  (C4 . D8 = C4 . (C4 x C2)) : C2  YES
+     64   112        (C4 x C2) : C8  YES
+     64   113        (C4 : C8) : C2  YES
+     64   114        (C4 : C8) : C2  YES
+     64   115               C8 x D8  YES
+     64   116  (C2 x C2) : (C8 : C2)  YES
+     64   117        C4 : (C8 : C2)  YES
+     64   118              C4 x D16  YES
+     64   119             C4 x QD16  YES
+     64   120              C4 x Q16  YES
+     64   121        C8 : (C4 x C2)  YES
+     64   122              Q16 : C4  YES
+     64   123        C8 : (C4 x C2)  YES
+     64   124             QD16 : C4  YES
+     64   125              Q16 : C4  YES
+     64   126               C8 x Q8  YES
+     64   127               C8 : Q8  YES
+     64   128       (C2 x C2) : D16  YES
+     64   129      (C2 x C2) : QD16  YES
+     64   130               Q8 : D8  YES
+     64   131      (C2 x C2) : QD16  YES
+     64   132       (C2 x C2) : Q16  YES
+     64   133        (Q8 : C4) : C2  YES
+     64   134               Q8 : D8  YES
+     64   135  ((C4 x C4) : C2) : C2  YES
+     64   136  (C8 : C2) : (C2 x C2)  YES
+     64   137  ((C4 x C4) : C2) : C2  YES
+     64   138        (C4 x C2) : D8  YES
+     64   139  ((C4 x C2) : C2) : (C2 x C2)  YES
+     64   140              C4 : D16  YES
+     64   141             C4 : QD16  YES
+     64   142             C4 : QD16  YES
+     64   143              C4 : Q16  YES
+     64   144        (Q8 : C4) : C2  YES
+     64   145        (Q8 : C4) : C2  YES
+     64   146      (C2 x C2) : QD16  YES
+     64   147       (C2 x C2) : D16  YES
+     64   148       (C2 x C2) : Q16  YES
+     64   149               C8 : D8  YES
+     64   150               C8 : D8  YES
+     64   151        (Q8 : C4) : C2  YES
+     64   152  (C2 . ((C4 x C2) : C2) = (C2 x C2) . (C4 x C2)) : C2  YES
+     64   153  ((C8 : C2) : C2) : C2  YES
+     64   154  (C2 . ((C4 x C2) : C2) = (C2 x C2) . (C4 x C2)) : C2  YES
+     64   155               D8 : Q8  YES
+     64   156               Q8 : Q8  YES
+     64   157               D8 : Q8  YES
+     64   158               Q8 : Q8  YES
+     64   159        (C8 : C4) : C2  YES
+     64   160  (C2 x C2) . (C2 x D8) = (C4 x C2) . (C2 x C2 x C2)  YES
+     64   161        (C8 : C4) : C2  YES
+     64   162        (C8 : C4) : C2  YES
+     64   163        (C8 : C4) : C2  YES
+     64   164        (C8 : C4) : C2  YES
+     64   165        (C8 : C4) : C2  YES
+     64   166        (C8 : C4) : C2  YES
+     64   167        (C4 : Q8) : C2  YES
+     64   168  (C2 x C2) . (C2 x D8) = (C4 x C2) . (C2 x C2 x C2)  YES
+     64   169  ((C2 x C2) . (C2 x C2 x C2)) : C2  YES
+     64   170        (C4 : Q8) : C2  YES
+     64   171  ((C2 x C2) . (C2 x C2 x C2)) : C2  YES
+     64   172  (C2 x C2) . (C2 x D8) = (C4 x C2) . (C2 x C2 x C2)  YES
+     64   173             C4 : QD16  YES
+     64   174              C4 : D16  YES
+     64   175              C4 : Q16  YES
+     64   176       (C2 x Q16) : C2  YES
+     64   177               C8 : D8  YES
+     64   178       (C2 x Q16) : C2  YES
+     64   179               C8 : Q8  YES
+     64   180  (C2 x C2) . (C2 x D8) = (C4 x C2) . (C2 x C2 x C2)  YES
+     64   181               C8 : Q8  YES
+     64   182               C8 : Q8  YES
+     64   183         C16 x C2 x C2  YES
+     64   184       C2 x (C16 : C2)  YES
+     64   185       (C16 : C2) : C2  YES
+     64   186              C2 x D32  YES
+     64   187             C2 x QD32  YES
+     64   188              C2 x Q32  YES
+     64   189              Q32 : C2  YES
+     64   190       C16 : (C2 x C2)  YES
+     64   191              Q32 : C2  YES
+     64   192     C4 x C4 x C2 x C2  YES
+     64   193  C2 x C2 x ((C4 x C2) : C2)  YES
+     64   194   C2 x C2 x (C4 : C4)  YES
+     64   195  C2 x ((C4 x C4) : C2)  YES
+     64   196          C2 x C4 x D8  YES
+     64   197          C2 x C4 x Q8  YES
+     64   198  C4 x ((C4 x C2) : C2)  YES
+     64   199        D8 : (C4 x C2)  YES
+     64   200        (C2 x Q8) : C4  YES
+     64   201        Q8 : (C4 x C2)  YES
+     64   202  C2 x ((C2 x C2 x C2 x C2) : C2)  YES
+     64   203  C2 x ((C4 x C2 x C2) : C2)  YES
+     64   204  C2 x ((C2 x Q8) : C2)  YES
+     64   205  C2 x ((C4 x C2 x C2) : C2)  YES
+     64   206  (C2 x C2) : ((C4 x C2) : C2)  YES
+     64   207  C2 x ((C4 x C4) : C2)  YES
+     64   208  C2 x ((C2 x C2) . (C2 x C2 x C2))  YES
+     64   209  C2 x ((C4 x C4) : C2)  YES
+     64   210  ((C4 x C4) : C2) : C2  YES
+     64   211  C2 x ((C4 x C4) : C2)  YES
+     64   212        C2 x (C4 : Q8)  YES
+     64   213  C4 : ((C4 x C2) : C2)  YES
+     64   214        (C4 x C2) : Q8  YES
+     64   215   (C2 x C2 x C2) : D8  YES
+     64   216        (C4 x C2) : D8  YES
+     64   217  ((C2 x Q8) : C2) : C2  YES
+     64   218        (C4 x C2) : D8  YES
+     64   219  (C2 x Q8) : (C2 x C2)  YES
+     64   220  ((C4 x C4) : C2) : C2  YES
+     64   221  ((C4 x C2 x C2) : C2) : C2  YES
+     64   222  ((C2 x C2) . (C2 x C2 x C2)) : C2  YES
+     64   223  ((C2 x Q8) : C2) : C2  YES
+     64   224   (C2 x C2 x C2) : Q8  YES
+     64   225        (C4 x C2) : Q8  YES
+     64   226               D8 x D8  YES
+     64   227               D8 : D8  YES
+     64   228               D8 : D8  YES
+     64   229               Q8 : D8  YES
+     64   230               Q8 x D8  YES
+     64   231               Q8 : D8  YES
+     64   232  (C4 : C4) : (C2 x C2)  YES
+     64   233  ((C4 x C4) : C2) : C2  YES
+     64   234  ((C4 x C4) : C2) : C2  YES
+     64   235               D8 : Q8  YES
+     64   236  ((C4 x C4) : C2) : C2  YES
+     64   237  ((C4 x C4) : C2) : C2  YES
+     64   238               Q8 : Q8  YES
+     64   239               Q8 x Q8  YES
+     64   240  ((C4 x C2 x C2) : C2) : C2  YES
+     64   241  (C4 : C4) : (C2 x C2)  YES
+     64   242  ((C4 x C2) : C2) : (C2 x C2)  YES
+     64   243  ((C2 x C2) . (C2 x C2 x C2)) : C2  YES
+     64   244  ((C4 x C4) : C2) : C2  YES
+     64   245  (C2 x C2) . (C2 x C2 x C2 x C2)  YES
+     64   246     C8 x C2 x C2 x C2  YES
+     64   247   C2 x C2 x (C8 : C2)  YES
+     64   248  C2 x ((C8 x C2) : C2)  YES
+     64   249  (C8 x C2) : (C2 x C2)  YES
+     64   250         C2 x C2 x D16  YES
+     64   251        C2 x C2 x QD16  YES
+     64   252         C2 x C2 x Q16  YES
+     64   253  C2 x ((C8 x C2) : C2)  YES
+     64   254  C2 x (C8 : (C2 x C2))  YES
+     64   255  C2 x ((C2 x Q8) : C2)  YES
+     64   256      QD16 : (C2 x C2)  YES
+     64   257       Q16 : (C2 x C2)  YES
+     64   258      QD16 : (C2 x C2)  YES
+     64   259       (C2 x Q16) : C2  YES
+     64   260  C4 x C2 x C2 x C2 x C2  YES
+     64   261     C2 x C2 x C2 x D8  YES
+     64   262     C2 x C2 x C2 x Q8  YES
+     64   263  C2 x C2 x ((C4 x C2) : C2)  YES
+     64   264  C2 x ((C2 x C2 x C2) : (C2 x C2))  YES
+     64   265  C2 x ((C2 x Q8) : C2)  YES
+     64   266  ((C4 x C2) : C2) : (C2 x C2)  YES
+     64   267  C2 x C2 x C2 x C2 x C2 x C2  YES
+     65     1                   C65  cyclic — skip
+     66     1              C11 x S3  no
+     66     2              C3 x D22  no
+     66     3                   D66  no
+     66     4                   C66  cyclic — skip
+     67     1                   C67  cyclic — skip
+     68     1              C17 : C4  no
+     68     2                   C68  cyclic — skip
+     68     3              C17 : C4  no
+     68     4                   D68  YES
+     68     5              C34 x C2  YES
+     69     1                   C69  cyclic — skip
+     70     1              C7 x D10  no
+     70     2              C5 x D14  no
+     70     3                   D70  no
+     70     4                   C70  cyclic — skip
+     71     1                   C71  cyclic — skip
+     72     1               C9 : C8  no
+     72     2                   C72  cyclic — skip
+     72     3               Q8 : C9  no
+     72     4               C9 : Q8  YES
+     72     5              C4 x D18  YES
+     72     6                   D72  YES
+     72     7        C2 x (C9 : C4)  YES
+     72     8       (C18 x C2) : C2  YES
+     72     9              C36 x C2  YES
+     72    10               C9 x D8  YES
+     72    11               C9 x Q8  YES
+     72    12        C3 x (C3 : C8)  no
+     72    13        (C3 x C3) : C8  YES
+     72    14              C24 x C3  YES
+     72    15  ((C2 x C2) : C9) : C2  no
+     72    16  C2 x ((C2 x C2) : C9)  no
+     72    17         C2 x C2 x D18  YES
+     72    18         C18 x C2 x C2  YES
+     72    19        (C3 x C3) : C8  no
+     72    20        (C3 : C4) x S3  YES
+     72    21  (C3 x C3) : (C4 x C2)  YES
+     72    22        (C6 x S3) : C2  YES
+     72    23        (C6 x S3) : C2  YES
+     72    24        (C3 x C3) : Q8  YES
+     72    25          C3 x SL(2,3)  YES
+     72    26        C3 x (C3 : Q8)  YES
+     72    27              C12 x S3  YES
+     72    28              C3 x D24  YES
+     72    29        C6 x (C3 : C4)  YES
+     72    30  C3 x ((C6 x C2) : C2)  YES
+     72    31        (C3 x C3) : Q8  YES
+     72    32  C4 x ((C3 x C3) : C2)  YES
+     72    33       (C12 x C3) : C2  YES
+     72    34  C2 x ((C3 x C3) : C4)  YES
+     72    35        (C6 x C6) : C2  YES
+     72    36              C12 x C6  YES
+     72    37          C3 x C3 x D8  YES
+     72    38          C3 x C3 x Q8  YES
+     72    39        (C3 x C3) : C8  no
+     72    40        (S3 x S3) : C2  YES
+     72    41        (C3 x C3) : Q8  YES
+     72    42               C3 x S4  YES
+     72    43        (C3 x A4) : C2  YES
+     72    44               A4 x S3  no
+     72    45  C2 x ((C3 x C3) : C4)  YES
+     72    46          C2 x S3 x S3  YES
+     72    47               C6 x A4  YES
+     72    48          C2 x C6 x S3  YES
+     72    49  C2 x C2 x ((C3 x C3) : C2)  YES
+     72    50          C6 x C6 x C2  YES
+     73     1                   C73  cyclic — skip
+     74     1                   D74  no
+     74     2                   C74  cyclic — skip
+     75     1                   C75  cyclic — skip
+     75     2        (C5 x C5) : C3  no
+     75     3              C15 x C5  YES
+     76     1              C19 : C4  no
+     76     2                   C76  cyclic — skip
+     76     3                   D76  YES
+     76     4              C38 x C2  YES
+     77     1                   C77  cyclic — skip
+     78     1              C13 : C6  no
+     78     2       C2 x (C13 : C3)  no
+     78     3              C13 x S3  no
+     78     4              C3 x D26  no
+     78     5                   D78  no
+     78     6                   C78  cyclic — skip
+     79     1                   C79  cyclic — skip
+     80     1              C5 : C16  no
+     80     2                   C80  cyclic — skip
+     80     3              C5 : C16  no
+     80     4              C8 x D10  YES
+     80     5              C40 : C2  YES
+     80     6              C40 : C2  YES
+     80     7                   D80  YES
+     80     8              C5 : Q16  YES
+     80     9        C2 x (C5 : C8)  YES
+     80    10        (C5 : C8) : C2  YES
+     80    11        C4 x (C5 : C4)  YES
+     80    12        (C5 : C4) : C4  YES
+     80    13              C20 : C4  YES
+     80    14       (C20 x C2) : C2  YES
+     80    15        (C5 x D8) : C2  YES
+     80    16        (C5 : Q8) : C2  YES
+     80    17        (C5 x Q8) : C2  YES
+     80    18              C5 : Q16  YES
+     80    19       (C10 x C2) : C4  YES
+     80    20              C20 x C4  YES
+     80    21  C5 x ((C4 x C2) : C2)  YES
+     80    22        C5 x (C4 : C4)  YES
+     80    23              C40 x C2  YES
+     80    24        C5 x (C8 : C2)  YES
+     80    25              C5 x D16  YES
+     80    26             C5 x QD16  YES
+     80    27              C5 x Q16  YES
+     80    28        C5 : (C8 x C2)  YES
+     80    29        (C5 : C8) : C2  YES
+     80    30        C4 x (C5 : C4)  YES
+     80    31              C20 : C4  YES
+     80    32        C2 x (C5 : C8)  YES
+     80    33        (C5 : C8) : C2  YES
+     80    34       (C10 x C2) : C4  YES
+     80    35        C2 x (C5 : Q8)  YES
+     80    36         C2 x C4 x D10  YES
+     80    37              C2 x D40  YES
+     80    38       (C20 x C2) : C2  YES
+     80    39              D8 x D10  YES
+     80    40       (C4 x D10) : C2  YES
+     80    41              Q8 x D10  YES
+     80    42       (C4 x D10) : C2  YES
+     80    43   C2 x C2 x (C5 : C4)  YES
+     80    44  C2 x ((C10 x C2) : C2)  YES
+     80    45         C20 x C2 x C2  YES
+     80    46              C10 x D8  YES
+     80    47              C10 x Q8  YES
+     80    48  C5 x ((C4 x C2) : C2)  YES
+     80    49  (C2 x C2 x C2 x C2) : C5  no
+     80    50   C2 x C2 x (C5 : C4)  YES
+     80    51    C2 x C2 x C2 x D10  YES
+     80    52    C10 x C2 x C2 x C2  YES
+     81     1                   C81  cyclic — skip
+     81     2               C9 x C9  YES
+     81     3        (C9 x C3) : C3  YES
+     81     4               C9 : C9  YES
+     81     5              C27 x C3  YES
+     81     6              C27 : C3  YES
+     81     7   (C3 x C3 x C3) : C3  YES
+     81     8        (C9 x C3) : C3  YES
+     81     9        (C9 x C3) : C3  YES
+     81    10  C3 . ((C3 x C3) : C3) = (C3 x C3) . (C3 x C3)  YES
+     81    11          C9 x C3 x C3  YES
+     81    12  C3 x ((C3 x C3) : C3)  YES
+     81    13        C3 x (C9 : C3)  YES
+     81    14        (C9 x C3) : C3  YES
+     81    15     C3 x C3 x C3 x C3  YES
+     82     1                   D82  no
+     82     2                   C82  cyclic — skip
+     83     1                   C83  cyclic — skip
+     84     1              C7 : C12  no
+     84     2        C4 x (C7 : C3)  no
+     84     3        C7 x (C3 : C4)  no
+     84     4        C3 x (C7 : C4)  no
+     84     5              C21 : C4  no
+     84     6                   C84  cyclic — skip
+     84     7        C2 x (C7 : C6)  YES
+     84     8              S3 x D14  YES
+     84     9   C2 x C2 x (C7 : C3)  YES
+     84    10               C7 x A4  no
+     84    11       (C14 x C2) : C3  no
+     84    12              C6 x D14  YES
+     84    13              C14 x S3  YES
+     84    14                   D84  YES
+     84    15              C42 x C2  YES
+     85     1                   C85  cyclic — skip
+     86     1                   D86  no
+     86     2                   C86  cyclic — skip
+     87     1                   C87  cyclic — skip
+     88     1              C11 : C8  no
+     88     2                   C88  cyclic — skip
+     88     3              C11 : Q8  YES
+     88     4              C4 x D22  YES
+     88     5                   D88  YES
+     88     6       C2 x (C11 : C4)  YES
+     88     7       (C22 x C2) : C2  YES
+     88     8              C44 x C2  YES
+     88     9              C11 x D8  YES
+     88    10              C11 x Q8  YES
+     88    11         C2 x C2 x D22  YES
+     88    12         C22 x C2 x C2  YES
+     89     1                   C89  cyclic — skip
+     90     1              C5 x D18  no
+     90     2              C9 x D10  no
+     90     3                   D90  no
+     90     4                   C90  cyclic — skip
+     90     5         C3 x C3 x D10  YES
+     90     6              C15 x S3  no
+     90     7              C3 x D30  no
+     90     8  C5 x ((C3 x C3) : C2)  YES
+     90     9       (C15 x C3) : C2  YES
+     90    10              C30 x C3  YES
+     91     1                   C91  cyclic — skip
+     92     1              C23 : C4  no
+     92     2                   C92  cyclic — skip
+     92     3                   D92  YES
+     92     4              C46 x C2  YES
+     93     1              C31 : C3  no
+     93     2                   C93  cyclic — skip
+     94     1                   D94  no
+     94     2                   C94  cyclic — skip
+     95     1                   C95  cyclic — skip
+     96     1              C3 : C32  no
+     96     2                   C96  cyclic — skip
+     96     3  ((C4 x C2) : C4) : C3  no
+     96     4              C16 x S3  YES
+     96     5       C3 : (C16 : C2)  YES
+     96     6                   D96  YES
+     96     7             C3 : QD32  YES
+     96     8              C3 : Q32  YES
+     96     9        C4 x (C3 : C8)  YES
+     96    10        C3 : (C8 : C4)  YES
+     96    11        C3 : (C4 : C8)  YES
+     96    12  C3 : ((C4 x C4) : C2)  YES
+     96    13  C3 : ((C2 x C2 x C2) : C4)  YES
+     96    14        C3 : (C8 : C4)  YES
+     96    15        C3 : (C8 : C4)  YES
+     96    16  C3 : ((C8 x C2) : C2)  YES
+     96    17        C3 : (Q8 : C4)  YES
+     96    18       C2 x (C3 : C16)  YES
+     96    19       C3 : (C16 : C2)  YES
+     96    20        C8 x (C3 : C4)  YES
+     96    21        C3 : (C4 : C8)  YES
+     96    22        C3 : (C8 : C4)  YES
+     96    23        C3 : (Q8 : C4)  YES
+     96    24        C3 : (C8 : C4)  YES
+     96    25        C3 : (C8 : C4)  YES
+     96    26  C3 : (C4 . D8 = C4 . (C4 x C2))  YES
+     96    27  C3 : ((C8 x C2) : C2)  YES
+     96    28  C3 : ((C8 x C2) : C2)  YES
+     96    29  C3 : (C4 . D8 = C4 . (C4 x C2))  YES
+     96    30  C3 : ((C8 : C2) : C2)  YES
+     96    31  C3 : (C2 . ((C4 x C2) : C2) = (C2 x C2) . (C4 x C2))  YES
+     96    32  C3 : ((C4 x C4) : C2)  YES
+     96    33              C3 : D32  YES
+     96    34             C3 : QD32  YES
+     96    35             C3 : QD32  YES
+     96    36              C3 : Q32  YES
+     96    37  C3 : ((C8 x C2) : C2)  YES
+     96    38  C3 : ((C4 x C2) : C4)  YES
+     96    39  C3 : ((C8 x C2) : C2)  YES
+     96    40  C3 : ((C8 : C2) : C2)  YES
+     96    41  C3 : ((C2 x C2 x C2) : C4)  YES
+     96    42        C3 : (Q8 : C4)  YES
+     96    43  C3 : (C2 . ((C4 x C2) : C2) = (C2 x C2) . (C4 x C2))  YES
+     96    44  C3 : ((C4 x C4) : C2)  YES
+     96    45  C3 x ((C4 x C2) : C4)  YES
+     96    46              C24 x C4  YES
+     96    47        C3 x (C8 : C4)  YES
+     96    48  C3 x ((C8 x C2) : C2)  YES
+     96    49  C3 x ((C2 x C2 x C2) : C4)  YES
+     96    50  C3 x ((C8 : C2) : C2)  YES
+     96    51  C3 x (C2 . ((C4 x C2) : C2) = (C2 x C2) . (C4 x C2))  YES
+     96    52  C3 x ((C8 x C2) : C2)  YES
+     96    53        C3 x (Q8 : C4)  YES
+     96    54  C3 x ((C4 x C4) : C2)  YES
+     96    55        C3 x (C4 : C8)  YES
+     96    56        C3 x (C8 : C4)  YES
+     96    57        C3 x (C8 : C4)  YES
+     96    58  C3 x (C4 . D8 = C4 . (C4 x C2))  YES
+     96    59              C48 x C2  YES
+     96    60       C3 x (C16 : C2)  YES
+     96    61              C3 x D32  YES
+     96    62             C3 x QD32  YES
+     96    63              C3 x Q32  YES
+     96    64        (C4 x C4) : S3  no
+     96    65  (C2 x C2) : (C3 : C8)  no
+     96    66        Q8 : (C3 : C4)  no
+     96    67          SL(2,3) : C4  no
+     96    68  C2 x ((C4 x C4) : C3)  no
+     96    69          C4 x SL(2,3)  no
+     96    70  ((C2 x C2 x C2 x C2) : C2) : C3  no
+     96    71  ((C4 x C4) : C2) : C3  no
+     96    72  ((C4 x C4) : C2) : C3  no
+     96    73               C8 x A4  no
+     96    74  ((C8 x C2) : C2) : C3  no
+     96    75        C4 x (C3 : Q8)  YES
+     96    76        C3 : (C4 : Q8)  YES
+     96    77  C3 : ((C2 x C2) . (C2 x C2 x C2))  YES
+     96    78          C4 x C4 x S3  YES
+     96    79  C3 : ((C4 x C4) : C2)  YES
+     96    80              C4 x D24  YES
+     96    81  C3 : ((C4 x C4) : C2)  YES
+     96    82  C3 : ((C4 x C4) : C2)  YES
+     96    83  C3 : ((C4 x C4) : C2)  YES
+     96    84  C3 : ((C4 x C4) : C2)  YES
+     96    85  C3 : ((C2 x Q8) : C2)  YES
+     96    86  C3 : ((C4 x C4) : C2)  YES
+     96    87  ((C4 x C2) : C2) x S3  YES
+     96    88        C3 : (C4 x D8)  YES
+     96    89  C3 : ((C2 x C2 x C2 x C2) : C2)  YES
+     96    90  C3 : ((C4 x C2 x C2) : C2)  YES
+     96    91  C3 : ((C4 x C2 x C2) : C2)  YES
+     96    92  C3 : ((C4 x C4) : C2)  YES
+     96    93  C3 : ((C4 x C2 x C2) : C2)  YES
+     96    94        C3 : (C4 x Q8)  YES
+     96    95        C3 : (C4 : Q8)  YES
+     96    96  C3 : ((C2 x C2) . (C2 x C2 x C2))  YES
+     96    97  C3 : ((C2 x C2) . (C2 x C2 x C2))  YES
+     96    98        (C4 : C4) x S3  YES
+     96    99  C3 : ((C4 x C4) : C2)  YES
+     96   100        C3 : (C4 x D8)  YES
+     96   101  C3 : ((C4 x C2 x C2) : C2)  YES
+     96   102  C3 : ((C4 x C2 x C2) : C2)  YES
+     96   103  C3 : ((C2 x Q8) : C2)  YES
+     96   104  C3 : ((C2 x Q8) : C2)  YES
+     96   105  C3 : ((C4 x C4) : C2)  YES
+     96   106          C2 x C8 x S3  YES
+     96   107       C2 x (C24 : C2)  YES
+     96   108  C3 : ((C8 x C2) : C2)  YES
+     96   109       C2 x (C24 : C2)  YES
+     96   110              C2 x D48  YES
+     96   111  C3 : ((C8 x C2) : C2)  YES
+     96   112       C2 x (C3 : Q16)  YES
+     96   113        (C8 : C2) x S3  YES
+     96   114  C3 : ((C8 x C2) : C2)  YES
+     96   115  C3 : (C8 : (C2 x C2))  YES
+     96   116  C3 : ((C2 x Q8) : C2)  YES
+     96   117              D16 x S3  YES
+     96   118  C3 : (C8 : (C2 x C2))  YES
+     96   119  C3 : ((C8 x C2) : C2)  YES
+     96   120             QD16 x S3  YES
+     96   121  C3 : (C8 : (C2 x C2))  YES
+     96   122  C3 : ((C2 x Q8) : C2)  YES
+     96   123  C3 : ((C8 x C2) : C2)  YES
+     96   124              Q16 x S3  YES
+     96   125  C3 : ((C2 x Q8) : C2)  YES
+     96   126  C3 : ((C8 x C2) : C2)  YES
+     96   127   C2 x C2 x (C3 : C8)  YES
+     96   128  C2 x ((C3 : C8) : C2)  YES
+     96   129   C2 x C4 x (C3 : C4)  YES
+     96   130  C2 x ((C3 : C4) : C4)  YES
+     96   131  C3 : ((C2 x Q8) : C2)  YES
+     96   132       C2 x (C12 : C4)  YES
+     96   133  C3 : ((C4 x C4) : C2)  YES
+     96   134  C2 x ((C12 x C2) : C2)  YES
+     96   135  C4 x ((C6 x C2) : C2)  YES
+     96   136  C3 : ((C4 x C2 x C2) : C2)  YES
+     96   137  C3 : ((C4 x C2 x C2) : C2)  YES
+     96   138  C2 x ((C3 x D8) : C2)  YES
+     96   139  C3 : (C8 : (C2 x C2))  YES
+     96   140  C2 x ((C3 : Q8) : C2)  YES
+     96   141        D8 x (C3 : C4)  YES
+     96   142  C3 : ((C4 x C2 x C2) : C2)  YES
+     96   143  C3 : ((C4 x C4) : C2)  YES
+     96   144  C3 : ((C2 x C2 x C2 x C2) : C2)  YES
+     96   145  C3 : ((C4 x C2 x C2) : C2)  YES
+     96   146  C3 : ((C4 x C2 x C2) : C2)  YES
+     96   147  C3 : ((C4 x C4) : C2)  YES
+     96   148  C2 x ((C3 x Q8) : C2)  YES
+     96   149  C3 : ((C2 x Q8) : C2)  YES
+     96   150       C2 x (C3 : Q16)  YES
+     96   151        C3 : (C4 : Q8)  YES
+     96   152        Q8 x (C3 : C4)  YES
+     96   153  C3 : ((C2 x Q8) : C2)  YES
+     96   154  C3 : ((C4 x C4) : C2)  YES
+     96   155  C3 : ((C8 x C2) : C2)  YES
+     96   156  C3 : (C8 : (C2 x C2))  YES
+     96   157  C3 : ((C8 x C2) : C2)  YES
+     96   158  C3 : ((C2 x Q8) : C2)  YES
+     96   159  C2 x ((C6 x C2) : C4)  YES
+     96   160  C3 : ((C2 x C2 x C2 x C2) : C2)  YES
+     96   161         C12 x C4 x C2  YES
+     96   162  C6 x ((C4 x C2) : C2)  YES
+     96   163        C6 x (C4 : C4)  YES
+     96   164  C3 x ((C4 x C4) : C2)  YES
+     96   165              C12 x D8  YES
+     96   166              C12 x Q8  YES
+     96   167  C3 x ((C2 x C2 x C2 x C2) : C2)  YES
+     96   168  C3 x ((C4 x C2 x C2) : C2)  YES
+     96   169  C3 x ((C2 x Q8) : C2)  YES
+     96   170  C3 x ((C4 x C2 x C2) : C2)  YES
+     96   171  C3 x ((C4 x C4) : C2)  YES
+     96   172  C3 x ((C2 x C2) . (C2 x C2 x C2))  YES
+     96   173  C3 x ((C4 x C4) : C2)  YES
+     96   174  C3 x ((C4 x C4) : C2)  YES
+     96   175        C3 x (C4 : Q8)  YES
+     96   176         C24 x C2 x C2  YES
+     96   177        C6 x (C8 : C2)  YES
+     96   178  C3 x ((C8 x C2) : C2)  YES
+     96   179              C6 x D16  YES
+     96   180             C6 x QD16  YES
+     96   181              C6 x Q16  YES
+     96   182  C3 x ((C8 x C2) : C2)  YES
+     96   183  C3 x (C8 : (C2 x C2))  YES
+     96   184  C3 x ((C2 x Q8) : C2)  YES
+     96   185  (C2 x C2) : (C3 : Q8)  YES
+     96   186               C4 x S4  YES
+     96   187               C4 : S4  YES
+     96   188  C2 x (C2 . S4 = SL(2,3) . C2)  YES
+     96   189          C2 x GL(2,3)  YES
+     96   190        (C2 x Q8) : S3  YES
+     96   191  (C2 . S4 = SL(2,3) . C2) : C2  YES
+     96   192  ((C4 x C2) : C2) : S3  YES
+     96   193  ((C4 x C2) : C2) : S3  YES
+     96   194        C2 x (A4 : C4)  YES
+     96   195        (C2 x C2) : S4  YES
+     96   196          C2 x C4 x A4  YES
+     96   197               D8 x A4  YES
+     96   198     C2 x C2 x SL(2,3)  YES
+     96   199               Q8 x A4  YES
+     96   200  C2 x (((C4 x C2) : C2) : C3)  YES
+     96   201  ((C2 x C2 x C2) : (C2 x C2)) : C3  YES
+     96   202  ((C2 x Q8) : C2) : C3  YES
+     96   203   (C2 x C2 x Q8) : C3  YES
+     96   204  ((C2 x C2 x C2) : (C2 x C2)) : C3  YES
+     96   205   C2 x C2 x (C3 : Q8)  YES
+     96   206     C2 x C2 x C4 x S3  YES
+     96   207         C2 x C2 x D24  YES
+     96   208  C2 x ((C12 x C2) : C2)  YES
+     96   209          C2 x D8 x S3  YES
+     96   210  C2 x ((C4 x S3) : C2)  YES
+     96   211  C3 : ((C2 x C2 x C2) : (C2 x C2))  YES
+     96   212          C2 x Q8 x S3  YES
+     96   213  C2 x ((C4 x S3) : C2)  YES
+     96   214  C3 : ((C2 x Q8) : C2)  YES
+     96   215  ((C4 x C2) : C2) x S3  YES
+     96   216  C3 : ((C2 x C2 x C2) : (C2 x C2))  YES
+     96   217  C3 : ((C2 x Q8) : C2)  YES
+     96   218  C2 x C2 x C2 x (C3 : C4)  YES
+     96   219  C2 x C2 x ((C6 x C2) : C2)  YES
+     96   220    C12 x C2 x C2 x C2  YES
+     96   221          C2 x C6 x D8  YES
+     96   222          C2 x C6 x Q8  YES
+     96   223  C6 x ((C4 x C2) : C2)  YES
+     96   224  C3 x ((C2 x C2 x C2) : (C2 x C2))  YES
+     96   225  C3 x ((C2 x Q8) : C2)  YES
+     96   226          C2 x C2 x S4  YES
+     96   227        (C2 x C2) : S4  no
+     96   228     C2 x C2 x C2 x A4  YES
+     96   229  C2 x ((C2 x C2 x C2 x C2) : C3)  YES
+     96   230  C2 x C2 x C2 x C2 x S3  YES
+     96   231  C6 x C2 x C2 x C2 x C2  YES
+     97     1                   C97  cyclic — skip
+     98     1                   D98  no
+     98     2                   C98  cyclic — skip
+     98     3              C7 x D14  no
+     98     4        (C7 x C7) : C2  YES
+     98     5              C14 x C7  YES
+     99     1                   C99  cyclic — skip
+     99     2              C33 x C3  YES
+    100     1              C25 : C4  no
+    100     2                  C100  cyclic — skip
+    100     3              C25 : C4  no
+    100     4                  D100  YES
+    100     5              C50 x C2  YES
+    100     6        C5 x (C5 : C4)  no
+    100     7        (C5 x C5) : C4  YES
+    100     8              C20 x C5  YES
+    100     9        C5 x (C5 : C4)  no
+    100    10        (C5 x C5) : C4  no
+    100    11        (C5 x C5) : C4  YES
+    100    12        (C5 x C5) : C4  no
+    100    13             D10 x D10  YES
+    100    14             C10 x D10  YES
+    100    15  C2 x ((C5 x C5) : C2)  YES
+    100    16             C10 x C10  YES
+    101     1                  C101  cyclic — skip
+    102     1              C17 x S3  no
+    102     2              C3 x D34  no
+    102     3                  D102  no
+    102     4                  C102  cyclic — skip
+    103     1                  C103  cyclic — skip
+    104     1              C13 : C8  no
+    104     2                  C104  cyclic — skip
+    104     3              C13 : C8  no
+    104     4              C13 : Q8  YES
+    104     5              C4 x D26  YES
+    104     6                  D104  YES
+    104     7       C2 x (C13 : C4)  YES
+    104     8              C13 : D8  YES
+    104     9              C52 x C2  YES
+    104    10              C13 x D8  YES
+    104    11              C13 x Q8  YES
+    104    12       C2 x (C13 : C4)  YES
+    104    13         C2 x C2 x D26  YES
+    104    14         C26 x C2 x C2  YES
+    105     1        C5 x (C7 : C3)  no
+    105     2                  C105  cyclic — skip
+    106     1                  D106  no
+    106     2                  C106  cyclic — skip
+    107     1                  C107  cyclic — skip
+    108     1              C27 : C4  no
+    108     2                  C108  cyclic — skip
+    108     3       (C2 x C2) : C27  no
+    108     4                  D108  YES
+    108     5              C54 x C2  YES
+    108     6        C3 x (C9 : C4)  no
+    108     7        C9 x (C3 : C4)  no
+    108     8  ((C3 x C3) : C3) : C4  no
+    108     9        (C9 : C3) : C4  no
+    108    10        (C9 x C3) : C4  YES
+    108    11  ((C3 x C3) : C3) : C4  YES
+    108    12              C36 x C3  YES
+    108    13  C4 x ((C3 x C3) : C3)  YES
+    108    14        C4 x (C9 : C3)  YES
+    108    15  ((C3 x C3) : C3) : C4  no
+    108    16              S3 x D18  YES
+    108    17  ((C3 x C3) : C3) : (C2 x C2)  YES
+    108    18               C9 x A4  YES
+    108    19  (C2 x C2) : (C9 : C3)  YES
+    108    20  C3 x ((C2 x C2) : C9)  YES
+    108    21  (C2 x C2) : (C9 : C3)  YES
+    108    22  (C2 x C2) : ((C3 x C3) : C3)  YES
+    108    23              C6 x D18  YES
+    108    24              C18 x S3  YES
+    108    25  C2 x ((C3 x C3) : C6)  YES
+    108    26        C2 x (C9 : C6)  YES
+    108    27  C2 x ((C9 x C3) : C2)  YES
+    108    28  C2 x (((C3 x C3) : C3) : C2)  YES
+    108    29              C18 x C6  YES
+    108    30  C2 x C2 x ((C3 x C3) : C3)  YES
+    108    31   C2 x C2 x (C9 : C3)  YES
+    108    32   C3 x C3 x (C3 : C4)  YES
+    108    33  C3 x ((C3 x C3) : C4)  YES
+    108    34   (C3 x C3 x C3) : C4  YES
+    108    35         C12 x C3 x C3  YES
+    108    36  C3 x ((C3 x C3) : C4)  no
+    108    37   (C3 x C3 x C3) : C4  no
+    108    38          C3 x S3 x S3  YES
+    108    39  ((C3 x C3) : C2) x S3  YES
+    108    40  (C3 x C3 x C3) : (C2 x C2)  YES
+    108    41          C3 x C3 x A4  YES
+    108    42          C3 x C6 x S3  YES
+    108    43  C6 x ((C3 x C3) : C2)  YES
+    108    44  C2 x ((C3 x C3 x C3) : C2)  YES
+    108    45          C6 x C6 x C3  YES
+    109     1                  C109  cyclic — skip
+    110     1             C11 : C10  no
+    110     2       C2 x (C11 : C5)  no
+    110     3             C11 x D10  no
+    110     4              C5 x D22  no
+    110     5                  D110  no
+    110     6                  C110  cyclic — skip
+    111     1              C37 : C3  no
+    111     2                  C111  cyclic — skip
+    112     1              C7 : C16  no
+    112     2                  C112  cyclic — skip
+    112     3              C8 x D14  YES
+    112     4        C7 : (C8 : C2)  YES
+    112     5             C7 : QD16  YES
+    112     6                  D112  YES
+    112     7              C7 : Q16  YES
+    112     8        C2 x (C7 : C8)  YES
+    112     9        C7 : (C8 : C2)  YES
+    112    10        C4 x (C7 : C4)  YES
+    112    11        C7 : (C4 : C4)  YES
+    112    12        C7 : (C4 : C4)  YES
+    112    13  C7 : ((C4 x C2) : C2)  YES
+    112    14              C7 : D16  YES
+    112    15             C7 : QD16  YES
+    112    16             C7 : QD16  YES
+    112    17              C7 : Q16  YES
+    112    18  C7 : ((C4 x C2) : C2)  YES
+    112    19              C28 x C4  YES
+    112    20  C7 x ((C4 x C2) : C2)  YES
+    112    21        C7 x (C4 : C4)  YES
+    112    22              C56 x C2  YES
+    112    23        C7 x (C8 : C2)  YES
+    112    24              C7 x D16  YES
+    112    25             C7 x QD16  YES
+    112    26              C7 x Q16  YES
+    112    27        C2 x (C7 : Q8)  YES
+    112    28         C2 x C4 x D14  YES
+    112    29              C2 x D56  YES
+    112    30  C7 : ((C4 x C2) : C2)  YES
+    112    31              D8 x D14  YES
+    112    32  C7 : ((C4 x C2) : C2)  YES
+    112    33              Q8 x D14  YES
+    112    34  C7 : ((C4 x C2) : C2)  YES
+    112    35   C2 x C2 x (C7 : C4)  YES
+    112    36  C2 x ((C14 x C2) : C2)  YES
+    112    37         C28 x C2 x C2  YES
+    112    38              C14 x D8  YES
+    112    39              C14 x Q8  YES
+    112    40  C7 x ((C4 x C2) : C2)  YES
+    112    41  C2 x ((C2 x C2 x C2) : C7)  no
+    112    42    C2 x C2 x C2 x D14  YES
+    112    43    C14 x C2 x C2 x C2  YES
+    113     1                  C113  cyclic — skip
+    114     1              C19 : C6  no
+    114     2       C2 x (C19 : C3)  no
+    114     3              C19 x S3  no
+    114     4              C3 x D38  no
+    114     5                  D114  no
+    114     6                  C114  cyclic — skip
+    115     1                  C115  cyclic — skip
+    116     1              C29 : C4  no
+    116     2                  C116  cyclic — skip
+    116     3              C29 : C4  no
+    116     4                  D116  YES
+    116     5              C58 x C2  YES
+    117     1              C13 : C9  no
+    117     2                  C117  cyclic — skip
+    117     3       C3 x (C13 : C3)  YES
+    117     4              C39 x C3  YES
+    118     1                  D118  no
+    118     2                  C118  cyclic — skip
+    119     1                  C119  cyclic — skip
+    120     1        C5 x (C3 : C8)  no
+    120     2        C3 x (C5 : C8)  no
+    120     3        C3 : (C5 : C8)  no
+    120     4                  C120  cyclic — skip
+    120     5               SL(2,5)  no
+    120     6        C3 x (C5 : C8)  no
+    120     7        C3 : (C5 : C8)  no
+    120     8       (C3 : C4) x D10  YES
+    120     9        S3 x (C5 : C4)  YES
+    120    10       C3 : (C4 x D10)  YES
+    120    11  C3 : ((C10 x C2) : C2)  YES
+    120    12              C3 : D40  YES
+    120    13  C3 : ((C10 x C2) : C2)  YES
+    120    14        C3 : (C5 : Q8)  YES
+    120    15          C5 x SL(2,3)  no
+    120    16        C3 x (C5 : Q8)  YES
+    120    17             C12 x D10  YES
+    120    18              C3 x D40  YES
+    120    19        C6 x (C5 : C4)  YES
+    120    20  C3 x ((C10 x C2) : C2)  YES
+    120    21        C5 x (C3 : Q8)  YES
+    120    22              C20 x S3  YES
+    120    23              C5 x D24  YES
+    120    24       C10 x (C3 : C4)  YES
+    120    25  C5 x ((C6 x C2) : C2)  YES
+    120    26        C3 : (C5 : Q8)  YES
+    120    27              C4 x D30  YES
+    120    28                  D120  YES
+    120    29       C2 x (C15 : C4)  YES
+    120    30  C3 : ((C10 x C2) : C2)  YES
+    120    31              C60 x C2  YES
+    120    32              C15 x D8  YES
+    120    33              C15 x Q8  YES
+    120    34                    S5  no
+    120    35               C2 x A5  no
+    120    36        S3 x (C5 : C4)  YES
+    120    37               C5 x S4  no
+    120    38               C5 : S4  no
+    120    39              A4 x D10  no
+    120    40        C6 x (C5 : C4)  YES
+    120    41       C2 x (C15 : C4)  YES
+    120    42         C2 x S3 x D10  YES
+    120    43              C10 x A4  no
+    120    44         C2 x C6 x D10  YES
+    120    45         C2 x C10 x S3  YES
+    120    46         C2 x C2 x D30  YES
+    120    47         C30 x C2 x C2  YES
+------------------------------------------------------------
+Summary: 937 groups have an equal covering, 180 do not (cyclic groups excluded)
+============================================================
+
+gap> quit();
+Syntax error: ; expected
+quit();
+    ^
+gap> quit;
