@@ -1,4 +1,4 @@
-# Author's algorithm (paraphrased from pages 23-24)
+
 FindEqualCovering := function(G)
     local expG, orders, d, S, union, s;
     
