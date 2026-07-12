@@ -16,7 +16,7 @@
 \usepackage{inputenc}
 \usepackage{microtype}
 \usepackage{titlesec}
-\usepackage{fancyhdr}
+% \usepackage{fancyhdr}
 \usepackage{tocloft}
 \usepackage{setspace}
 \usepackage{cite}
@@ -87,11 +87,11 @@
 }
 
 % ── Page Style ─────────────────────────────────────────────────────────────────
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[L]{\small Equal Coverings of Finite Groups}
-\fancyhead[R]{\small\thepage}
-\renewcommand{\headrulewidth}{0.4pt}
+\pagestyle{plain}
+% \fancyhf{}
+% \fancyhead[L]{\small Equal Coverings of Finite Groups}
+% \fancyhead[R]{\small\thepage}
+% \renewcommand{\headrulewidth}{0.4pt}
 
 \onehalfspacing
 
@@ -100,18 +100,106 @@
 
 % ── Title Page ─────────────────────────────────────────────────────────────────
 \begin{titlepage}
+  \thispagestyle{empty}
   \centering
-  \vspace*{2cm}
   {\LARGE\bfseries Equal Coverings of Finite Groups:\\[0.4em]
     Theory, Lean Formalization, and\\[0.4em]
     Computational Evidence\par}
+    \vspace{1em}
+    
+    \normalsize
+        THIRD YEAR PROJECT REPORT\\[2ex]
+        
+        \small
+        SUBMITTED IN PARTIAL FULFILLMENT OF THE REQUIREMENTS FOR\\
+        THE DEGREE OF BSC. IN COMPUTATIONAL MATHEMATICS\\[2cm]
+        
+        \normalsize
+        BY\\[2ex]
+          {\large Bishesh Bohora, Ashwot Acharya, Pranjal Man Shakya, Bhoomika Thapa\par}
+        \vspace{1em}
+        \includegraphics[width=4cm]{logo.png}\\[2cm]
+        
+        DEPARTMENT OF MATHEMATICS\\
+        KATHMANDU UNIVERSITY\\
+        DHULIKHEL, NEPAL\\[2ex]
   \vspace{2cm}
-  {\large Bishesh Bohora, Ashwot Acharya, Pranjal Man Shakya, Bhoomika Thapa\par}
   \vspace{0.5cm}
   {\large Department of Mathematics\par}
-  \vspace{0.5cm}
   {\large \today\par}
   \vspace{3cm}
+
+
+\newpage
+\thispagestyle{empty}
+\begin{center}
+    \textbf{\LARGE CERTIFICATION}
+\end{center}
+\raggedright
+\vspace{1em}
+
+This project entitled ``\textbf{Equal Coverings of Finite Groups:
+Theory, Lean Formalization, and
+Computational Evidence}'' is carried out under our supervision for the specified entire period satisfactorily and is hereby certified as a work done by the following students:
+\begin{enumerate}
+    \item Bishesh Bohora 
+    \item Ashwot Acharya
+    \item Pranjal Man Shakya
+    \item Bhoomika Thapa
+\end{enumerate}
+in partial fulfillment of the requirements for the degree of B.Sc. in Computational Mathematics, Department of Mathematics, Kathmandu University, Dhulikhel, Nepal.
+
+
+\vspace{3em}
+
+\noindent
+\begin{minipage}{0.45\textwidth}
+\rule{6cm}{0.5pt}\\
+\textbf{Dr. Gokul KC }\\
+Associate Professor\\
+Department of Mathematics,\\
+School of Science\\ Kathmandu University,\\
+Dhulikhel, Kavre, Nepal\\
+Date: {\today}
+
+\end{minipage}
+
+
+\vspace{2.5em}
+
+\noindent
+
+\textbf{APPROVED BY:}\\
+I hereby declare that the candidate qualifies to submit this report of \textbf{Equal Coverings of Finite Groups:
+Theory, Lean Formalization, and
+Computational Evidence} to the Department of Mathematics.
+
+\vspace{1.7em}
+
+\noindent
+\rule{6cm}{0.5pt}\\ 
+\textbf{Head of Department }\\
+Department of Mathematics\\
+School of Science\\
+Kathmandu University\\
+Date: {\today}
+
+\vspace{2em}
+
+
+\newpage
+\thispagestyle{empty}
+\begin{center}
+    \textbf{\LARGE ACKNOWLEDGMENTS}
+\end{center}
+\raggedright
+    First and foremost, we would like to thank our supervisor Dr. Gokul KC sir for guiding us through this research project.
+Their feedback and suggestions helped us overcome numerous challenges and shaped
+our understanding of the subject matter.
+
+\newpage
+\thispagestyle{empty}
+
   \begin{abstract}
     \noindent
 An \textbf{equal covering} of a finite group G is a collection of proper subgroups of equal order whose union is G. This report documents a research extension of the work of Velasquez-Berroteran \cite{velasquez2022}, which developed the theory of equal coverings and computationally classified groups up to order 60.
@@ -119,8 +207,8 @@ Our work proceeds along three strands. First, we present proofs of several found
 Together, these contributions provide a more complete theoretical foundation for the subject, a formal verification layer, and new computational evidence bearing on the open conjecture that no finite simple group admits an equal covering. Furthemore, We attempted a possible direction on proving the conjecture for some Alternating Groups.
   \end{abstract}
 \end{titlepage}
-
 \tableofcontents
+
 \newpage
 
 % ══════════════════════════════════════════════════════════════════════════════
@@ -691,7 +779,7 @@ theorem theorem13 {alpha : Type u} {G : Group alpha} {I : Type u}
 \end{lstlisting}
 
 
-Find remaining theorems on github.
+Find remaining theorems on github \cite{github}.
 
 % ══════════════════════════════════════════════════════════════════════════════
 \section{GAP Computational Investigation}
@@ -814,10 +902,10 @@ ShowCovering := function(G)
             subs := buckets.(key);
             if CoversGroup(subs, allEltsList, n) then
                 Print("Result   : *** EQUAL COVERING FOUND ***\n");
-                Print("------------------------------------------------------------\n");
+                Print("----------------------\n");
                 Print("Covering subgroup order : ", d, "\n");
                 Print("Number of subgroups     : ", Length(subs), "\n");
-                Print("------------------------------------------------------------\n");
+                Print("------------------------\n");
                 for i in [1 .. Length(subs)] do
                     Print("  Subgroup ", i, " : ", StructureDescription(subs[i]), "\n");
                     Print("  Elements  : ", AsSet(subs[i]), "\n");
@@ -916,13 +1004,13 @@ end;
 \begin{longtable}{llcccl}
   \caption{Group properties for orders 61--120} \label{tab:groups} \\
   \toprule
-  \textbf{Group ID} & \textbf{Name} & \textbf{Exp} & \textbf{Nilp.?}
+  \textbf{Group ID} & \textbf{Name} & \textbf{Exp} & \textbf{Nilp.}
     & \textbf{Equal cov.?} & \textbf{Reason} \\
   \midrule
   \endfirsthead
   \toprule
-  \textbf{Group ID} & \textbf{Name} & \textbf{Exp} & \textbf{Nilp.?}
-    & \textbf{Equal cov.?}\\
+  \textbf{Group ID} & \textbf{Name} & \textbf{Exp} & \textbf{Nilp.}
+    & \textbf{Equal cov.}\\
   \midrule
   \endhead
   \bottomrule
@@ -1954,6 +2042,7 @@ complete table consistent with all theoretical predictions.
 
 % ══════════════════════════════════════════════════════════════════════════════
 \bibliographystyle{plain}
+\newpage
 \bibliography{references}
 
 
